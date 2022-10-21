@@ -5,7 +5,12 @@
     "module": "commonjs",
     "types": ["node"],
     "emitDecoratorMetadata": true,
-    "target": "es2015"
+    "target": "es2015",
+    "baseUrl": ".",
+    "paths": {
+      "@core": ["./src/app/core"],
+      "@core/*": ["./src/app/core/*"]
+    }
   },
   "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
   "include": ["**/*.ts"]
