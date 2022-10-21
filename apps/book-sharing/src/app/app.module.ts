@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TuiAlertModule, TuiDialogModule, TuiRootModule } from '@taiga-ui/core';
 
 import { AppComponent } from './app.component';
@@ -10,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [AppComponent, NxWelcomeComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     TuiRootModule,
     TuiAlertModule,
