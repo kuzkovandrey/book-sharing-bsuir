@@ -8,8 +8,11 @@
     "target": "es2015",
     "baseUrl": ".",
     "paths": {
+      "@book-sharing/api-interfaces": ["../../libs/api-interfaces/src"],
       "@core": ["./src/app/core"],
-      "@core/*": ["./src/app/core/*"]
+      "@core/*": ["./src/app/core/*"],
+      "@users/*": ["./src/app/users/*"],
+      "@auth/*": ["./src/app/auth/*"]
     }
   },
   "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
