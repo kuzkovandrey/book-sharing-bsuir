@@ -7,6 +7,7 @@ import {
 import { BaseController } from '@core';
 import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { AuthPayload, AuthPayloadType } from './decorators';
 import { AccessTokenGuard, RefreshTokenGuard } from './guards';
 
 @Controller(ApiControllers.AUTH)
@@ -35,22 +36,23 @@ export class AuthController extends BaseController {
 
   @UseGuards(AccessTokenGuard)
   @Get(ApiControllers.LOGOUT)
-  logout(@Req() req: Request): Promise<unknown> {
-    return this.authService.logout((req as any).user['sub']);
+  logout(@AuthPayload() { userId }: AuthPayloadType): Promise<unknown> {
+    return this.authService.logout(userId);
   }
 
   @UseGuards(AccessTokenGuard)
   @Get('test')
-  test() {
+  test(@Req() req: Request) {
+    console.log(req);
     return 'test';
   }
 
   @UseGuards(RefreshTokenGuard)
   @Get(ApiControllers.REFRESH)
-  async refreshTokens(@Req() req: Request) {
+  async refreshTokens(
+    @AuthPayload() { userId, refreshToken }: AuthPayloadType
+  ) {
     try {
-      const userId = (req as any).user['sub'];
-      const refreshToken = (req as any).user['refreshToken'];
       return this.authService.refreshTokens(userId, refreshToken);
     } catch (error) {
       this.throwHttpExeption(error);

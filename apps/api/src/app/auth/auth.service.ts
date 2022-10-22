@@ -44,6 +44,7 @@ export class AuthService {
 
   async signIn(data: AuthDto): Promise<TokenDto> {
     const user = await this.usersService.findByUsername(data.username);
+
     if (!user) throw new UserAlredyExistsError();
 
     const passwordMatches = await argon2.verify(user.password, data.password);
@@ -81,7 +82,7 @@ export class AuthService {
         },
         {
           secret: this.jwt.accessSecret,
-          expiresIn: '15m',
+          expiresIn: '30m',
         }
       ),
       this.jwtService.signAsync(

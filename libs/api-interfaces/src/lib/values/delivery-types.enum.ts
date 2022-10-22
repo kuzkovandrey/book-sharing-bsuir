@@ -1,7 +1,7 @@
 export enum DeliveryTypes {
-  MAILING,
-  COME_YOURSELF,
-  DELIVERY_SERVICE,
+  MAILING = 'MAILING',
+  COME_YOURSELF = 'COME_YOURSELF',
+  DELIVERY_SERVICE = 'DELIVERY_SERVICE',
 }
 
 export const deliveryTypeToText = (type: DeliveryTypes): string => {

@@ -1,0 +1,22 @@
+// create offer
+{
+  "deliveryType": "MAILING",
+  "info": "info",
+  "isActive": true,
+  "book": {
+    "title": "title",
+    "description": "description",
+    "pageCount": 33,
+    "publicationYear": 2020,
+    "language": "Russian",
+    "genre": "genreName",
+    "publisher": "publisherName",
+    "pictures": ["pic", "pic2"],
+    "authors": [
+      {
+        "firstName": "firstName",
+        "lastName": "lastName"
+      }
+    ]
+  }
+}
