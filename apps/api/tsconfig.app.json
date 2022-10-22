@@ -12,7 +12,9 @@
       "@core": ["./src/app/core"],
       "@core/*": ["./src/app/core/*"],
       "@users/*": ["./src/app/users/*"],
-      "@auth/*": ["./src/app/auth/*"]
+      "@auth/*": ["./src/app/auth/*"],
+      "@books": ["./src/app/books"],
+      "@books/*": ["./src/app/books/*"]
     }
   },
   "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],

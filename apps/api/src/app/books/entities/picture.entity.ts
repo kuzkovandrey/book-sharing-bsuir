@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToMany, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne } from 'typeorm';
 
 import { BaseEntity, TableNames } from '@core';
 import { BookEntity } from './book.entity';

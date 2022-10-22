@@ -1,3 +1,4 @@
+import { GenresService } from './services/genres.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
@@ -8,7 +9,13 @@ import {
   PictureEntity,
   PublisherEntity,
 } from './entities';
-import { BooksService } from './services/books.service';
+import {
+  AuthorsService,
+  BooksService,
+  LanguagesService,
+  PicturesService,
+  PublishersService,
+} from './services';
 
 @Module({
   imports: [
@@ -21,6 +28,14 @@ import { BooksService } from './services/books.service';
       PublisherEntity,
     ]),
   ],
-  providers: [BooksService],
+  providers: [
+    BooksService,
+    AuthorsService,
+    GenresService,
+    LanguagesService,
+    PicturesService,
+    PublishersService,
+  ],
+  exports: [BooksService],
 })
 export class BooksModule {}

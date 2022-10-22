@@ -5,5 +5,7 @@ export enum TableNames {
   AUTHORS = 'authors',
   PUBLISHERS = 'publishers',
   BOOKS = 'books',
-  PICTURES = 'pictures'
+  PICTURES = 'pictures',
+  BOOK_OFFERS = 'book_offers',
+  DELIVEIES = 'deliveries',
 }
