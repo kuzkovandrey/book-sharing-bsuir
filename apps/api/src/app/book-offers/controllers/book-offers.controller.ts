@@ -1,8 +1,8 @@
-import { CreateCommentDto } from './../../../../../../libs/api-interfaces/src/lib/dto/create-comment.dto';
-import { CommentEntity } from './../entities/comment.entity';
 import {
+  BookOfferSearchParams,
   ChangeOfferValuesDto,
   CreateBookOfferDto,
+  CreateCommentDto,
 } from '@book-sharing/api-interfaces';
 import { BookOffersService } from '../services';
 import {
@@ -16,9 +16,10 @@ import {
 } from '@nestjs/common';
 import { ApiControllers } from '@book-sharing/api-interfaces';
 import { BaseController } from '@core';
-import { BookOfferEntity } from '../entities';
+import { BookOfferEntity, CommentEntity } from '../entities';
 import { AccessTokenGuard } from '@auth/guards';
 import { AuthPayload, AuthPayloadType } from '@auth/decorators';
+import { SearchParams } from '../utils';
 
 @Controller(ApiControllers.BOOK_OFFERS)
 export class BookOffersController extends BaseController {
@@ -29,6 +30,11 @@ export class BookOffersController extends BaseController {
   @Get()
   findAll(): Promise<BookOfferEntity[]> {
     return this.bookOffersService.findAll();
+  }
+
+  @Get(ApiControllers.SEARCH)
+  search(@SearchParams() params: BookOfferSearchParams) {
+    return this.bookOffersService.search(params.text, { ...params });
   }
 
   @Get('/:id')

@@ -2,8 +2,14 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": []
+    "types": [],
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": ["./src/app/core/*"],
+      "@core": ["./src/app/core"]
+    }
   },
+
   "files": ["src/main.ts", "src/polyfills.ts"],
   "include": ["src/**/*.d.ts"],
   "exclude": ["jest.config.ts", "**/*.test.ts", "**/*.spec.ts"]

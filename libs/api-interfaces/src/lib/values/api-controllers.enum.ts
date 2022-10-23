@@ -8,4 +8,5 @@ export enum ApiControllers {
   REFRESH = '/refresh',
   BOOK_OFFERS = '/book-offers',
   COMMENTS = '/comments',
+  SEARCH = '/search',
 }

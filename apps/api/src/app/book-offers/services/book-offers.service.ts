@@ -1,5 +1,6 @@
 import { UsersService } from '@users/services';
 import {
+  BookOfferSearchParams,
   ChangeOfferValuesDto,
   CreateBookOfferDto,
 } from '@book-sharing/api-interfaces';
@@ -7,7 +8,7 @@ import { BookOfferEntity, CommentEntity } from './../entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BooksService } from '@books';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CommentsService } from './comments.service';
 
 @Injectable()
@@ -51,6 +52,26 @@ export class BookOffersService {
   findById(id: number): Promise<BookOfferEntity> {
     return this.bookOffersRepository.findOneOrFail({
       where: { id },
+      relations: this.findRelations,
+      select: this.selectOptions,
+    });
+  }
+  search(
+    text: string,
+    { username, isActive, deliveryType, offerType }: BookOfferSearchParams = {}
+  ) {
+    return this.bookOffersRepository.find({
+      where: {
+        book: {
+          ...(text ? { title: Like(`%${text}%`) } : {}),
+        },
+        user: {
+          ...(username ? { username } : {}),
+        },
+        ...(isActive !== undefined ? { isActive } : {}),
+        ...(deliveryType !== undefined ? { deliveryType } : {}),
+        ...(offerType !== undefined ? { offerType } : {}),
+      },
       relations: this.findRelations,
       select: this.selectOptions,
     });
