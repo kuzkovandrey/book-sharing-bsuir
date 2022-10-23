@@ -7,4 +7,5 @@ export enum ApiControllers {
   LOGOUT = '/logout',
   REFRESH = '/refresh',
   BOOK_OFFERS = '/book-offers',
+  COMMENTS = '/comments',
 }

@@ -1,4 +1,5 @@
-import { Entity, Column } from 'typeorm';
+import { CommentEntity } from './../../book-offers/entities/comment.entity';
+import { Entity, Column, OneToMany } from 'typeorm';
 import { Exclude } from '@nestjs/class-transformer';
 import { BaseEntity, TableNames } from '@core';
 
@@ -17,4 +18,9 @@ export class UserEntity extends BaseEntity {
   @Column({ nullable: true, type: 'varchar' })
   @Exclude()
   refreshToken?: string;
+
+  @OneToMany(() => CommentEntity, (comment) => comment.user, {
+    onDelete: 'SET NULL',
+  })
+  comments: CommentEntity[];
 }

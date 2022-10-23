@@ -1,6 +1,7 @@
 // create offer
 {
   "deliveryType": "MAILING",
+  "offerType": "FREE",
   "info": "info",
   "isActive": true,
   "book": {

@@ -1,9 +1,17 @@
-import { DeliveryEntity } from './delivery.entity';
 import { BookEntity } from '../../books';
-import { Entity, Column, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  OneToOne,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 
 import { BaseEntity, TableNames } from '@core';
 import { UserEntity } from '@users/entities';
+import { DeliveryTypes, OfferType } from '@book-sharing/api-interfaces';
+import { CommentEntity } from './comment.entity';
 
 @Entity({ name: TableNames.BOOK_OFFERS })
 export class BookOfferEntity extends BaseEntity {
@@ -19,9 +27,27 @@ export class BookOfferEntity extends BaseEntity {
   @JoinColumn()
   book: BookEntity;
 
-  @ManyToOne(() => DeliveryEntity)
-  delivery: DeliveryEntity;
+  @Column({
+    nullable: false,
+    type: 'enum',
+    enum: DeliveryTypes,
+    default: DeliveryTypes.COME_YOURSELF,
+  })
+  deliveryType: DeliveryTypes;
+
+  @Column({
+    nullable: false,
+    type: 'enum',
+    enum: OfferType,
+    default: OfferType.FREE,
+  })
+  offerType: OfferType;
 
   @ManyToOne(() => UserEntity)
   user: UserEntity;
+
+  @OneToMany(() => CommentEntity, (comment) => comment.bookOffer, {
+    onDelete: 'SET NULL',
+  })
+  comments: CommentEntity[];
 }

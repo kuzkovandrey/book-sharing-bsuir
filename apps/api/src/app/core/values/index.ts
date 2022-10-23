@@ -8,4 +8,6 @@ export enum TableNames {
   PICTURES = 'pictures',
   BOOK_OFFERS = 'book_offers',
   DELIVEIES = 'deliveries',
+  OFFER_TYPES = 'offer_types',
+  COMMENTS = 'comments',
 }

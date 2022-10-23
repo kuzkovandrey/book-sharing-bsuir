@@ -1,2 +1,2 @@
 export * from './book-offer.entity';
-export * from './delivery.entity';
+export * from './comment.entity';

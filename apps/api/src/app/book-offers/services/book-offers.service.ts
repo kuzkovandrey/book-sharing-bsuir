@@ -3,12 +3,12 @@ import {
   ChangeOfferValuesDto,
   CreateBookOfferDto,
 } from '@book-sharing/api-interfaces';
-import { BookOfferEntity } from './../entities';
+import { BookOfferEntity, CommentEntity } from './../entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BooksService } from '@books';
 import { Repository } from 'typeorm';
-import { DeliveriesInitService } from './deliveries.service';
+import { CommentsService } from './comments.service';
 
 @Injectable()
 export class BookOffersService {
@@ -38,7 +38,7 @@ export class BookOffersService {
     private readonly bookOffersRepository: Repository<BookOfferEntity>,
     private readonly booksService: BooksService,
     private readonly usersService: UsersService,
-    private readonly deliveriesInitService: DeliveriesInitService
+    private readonly commentsService: CommentsService
   ) {}
 
   findAll(): Promise<BookOfferEntity[]> {
@@ -58,18 +58,17 @@ export class BookOffersService {
 
   async create(
     userId: number,
-    { book, deliveryType, info }: CreateBookOfferDto
+    { book, deliveryType, info, offerType }: CreateBookOfferDto
   ): Promise<BookOfferEntity> {
     const user = await this.usersService.findById(userId);
     const createdBook = await this.booksService.create(book);
 
-    const delivery = await this.deliveriesInitService.findByType(deliveryType);
-
     const offer = this.bookOffersRepository.create({
       info,
       book: createdBook,
-      delivery,
+      deliveryType,
       user,
+      offerType,
     });
 
     return offer.save();
@@ -83,20 +82,32 @@ export class BookOffersService {
 
   async changeValues(
     id: number,
-    { isActive, info, deliveryType }: Partial<ChangeOfferValuesDto>
+    { isActive, info, deliveryType, offerType }: Partial<ChangeOfferValuesDto>
   ): Promise<BookOfferEntity> {
     const offer = await this.bookOffersRepository.findOneByOrFail({ id });
 
-    if (deliveryType) {
-      const delivery = await this.deliveriesInitService.findByType(
-        deliveryType
-      );
-      offer.delivery = delivery;
-    }
-
+    offer.offerType = offerType ?? offer.offerType;
+    offer.deliveryType = deliveryType ?? offer.deliveryType;
     offer.isActive = isActive ?? offer.isActive;
     offer.info = info ?? offer.info;
 
     return offer.save();
+  }
+
+  getAllComments(offerId: number): Promise<CommentEntity[]> {
+    return this.commentsService.findAllByBookOfferId(offerId);
+  }
+
+  async createComment(
+    offerId: number,
+    userId: number,
+    text: string
+  ): Promise<CommentEntity> {
+    const user = await this.usersService.findById(userId);
+    const offer = await this.bookOffersRepository.findOneByOrFail({
+      id: offerId,
+    });
+
+    return this.commentsService.create(user, offer, text);
   }
 }

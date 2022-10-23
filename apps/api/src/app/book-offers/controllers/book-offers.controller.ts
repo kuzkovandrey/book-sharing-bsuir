@@ -1,3 +1,5 @@
+import { CreateCommentDto } from './../../../../../../libs/api-interfaces/src/lib/dto/create-comment.dto';
+import { CommentEntity } from './../entities/comment.entity';
 import {
   ChangeOfferValuesDto,
   CreateBookOfferDto,
@@ -62,5 +64,20 @@ export class BookOffersController extends BaseController {
     } catch (e) {
       this.throwHttpExeption(e);
     }
+  }
+
+  @Get(`${ApiControllers.COMMENTS}/:id`)
+  getAllComments(@Param('id') id: number): Promise<CommentEntity[]> {
+    return this.bookOffersService.getAllComments(id);
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Post(`${ApiControllers.COMMENTS}/:id`)
+  createComment(
+    @Param('id') offerId: number,
+    @Body() { text }: CreateCommentDto,
+    @AuthPayload() { userId }: AuthPayloadType
+  ): Promise<CommentEntity> {
+    return this.bookOffersService.createComment(offerId, userId, text);
   }
 }
