@@ -12,7 +12,7 @@ export class UserAlredyExistsError extends Error {
 
 export class UserNotFoundError extends Error {
   constructor() {
-    super('User alredy exists');
+    super('User not found');
   }
 }
 

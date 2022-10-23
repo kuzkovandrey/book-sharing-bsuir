@@ -61,4 +61,34 @@ export class UsersService {
   async remove(id: number): Promise<unknown> {
     return await this.usersRepository.delete(id);
   }
+
+  // public api
+
+  async getUserInfo(userId: number): Promise<Partial<UserEntity>> {
+    const user = await this.usersRepository.findOneBy({ id: userId });
+
+    if (!user) throw new UserNotFoundError();
+
+    const { id, createdAt, username, email } = user;
+
+    return {
+      id,
+      createdAt,
+      username,
+      email,
+    };
+  }
+
+  async updateUserInfo(
+    userId: number,
+    changes: Partial<Omit<CreateUserDto, 'refreshToken'>>
+  ): Promise<Partial<UserEntity>> {
+    return this.update(userId, changes);
+  }
+
+  async deleteUser(userId: number): Promise<unknown> {
+    await this.usersRepository.findOneByOrFail({ id: userId });
+
+    return await this.usersRepository.softDelete({ id: userId });
+  }
 }

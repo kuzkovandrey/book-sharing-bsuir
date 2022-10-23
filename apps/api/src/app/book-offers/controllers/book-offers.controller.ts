@@ -37,7 +37,7 @@ export class BookOffersController extends BaseController {
     return this.bookOffersService.search(params.text, { ...params });
   }
 
-  @Get('/:id')
+  @Get(':id')
   async findById(@Param('id') id: number) {
     try {
       return this.bookOffersService.findById(id);
