@@ -1,7 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AppRoutes } from './core';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: AppRoutes.MAIN,
+  },
+  {
+    path: AppRoutes.MAIN,
+    loadChildren: () =>
+      import('./pages/main/main.module').then((m) => m.MainModule),
+  },
+  {
+    path: AppRoutes.AUTH,
+    loadChildren: () =>
+      import('./pages/auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: AppRoutes.PROFILE,
+    loadChildren: () =>
+      import('./pages/profile/profile.module').then((m) => m.ProfileModule),
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

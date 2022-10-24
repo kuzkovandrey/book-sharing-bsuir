@@ -1,0 +1,23 @@
+@import 'mixins';
+@import 'vars';
+
+.header {
+  padding: 0 1rem;
+  height: $header-height;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include element(logo) {
+    font: var(--tui-font-heading-4);
+  }
+
+  @include element(auth) {
+    cursor: pointer;
+    font: var(--tui-font-text-l);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

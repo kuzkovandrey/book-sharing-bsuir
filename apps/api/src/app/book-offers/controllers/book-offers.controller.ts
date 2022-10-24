@@ -37,6 +37,11 @@ export class BookOffersController extends BaseController {
     return this.bookOffersService.search(params.text, { ...params });
   }
 
+  @Get(`${ApiControllers.USER}/:id`)
+  findAllByUserId(@Param('id') id: number): Promise<BookOfferEntity[]> {
+    return this.bookOffersService.findAllByUserId(id);
+  }
+
   @Get(':id')
   async findById(@Param('id') id: number) {
     try {

@@ -2,6 +2,7 @@ import { CommentEntity } from './../../book-offers/entities/comment.entity';
 import { Entity, Column, OneToMany } from 'typeorm';
 import { Exclude } from '@nestjs/class-transformer';
 import { BaseEntity, TableNames } from '@core';
+import { TelephoneEntity } from './telephone.entity';
 
 @Entity({ name: TableNames.USERS })
 export class UserEntity extends BaseEntity {
@@ -23,4 +24,10 @@ export class UserEntity extends BaseEntity {
     onDelete: 'SET NULL',
   })
   comments: CommentEntity[];
+
+  @OneToMany(() => TelephoneEntity, (tel) => tel.user, {
+    onDelete: 'SET NULL',
+    nullable: true,
+  })
+  telephones: TelephoneEntity[];
 }

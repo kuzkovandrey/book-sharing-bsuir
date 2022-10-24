@@ -7,8 +7,10 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Patch,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { UserEntity } from '@users/entities';
@@ -20,10 +22,20 @@ export class UsersController extends BaseController {
     super(UsersController.name);
   }
 
-  @Get(':id')
+  @Get(`${ApiControllers.USER}/:id`)
   async getInfo(@Param('id') id: number): Promise<Partial<UserEntity>> {
     try {
       return await this.usersService.getUserInfo(id);
+    } catch (e) {
+      this.throwHttpExeption(e);
+    }
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Get(ApiControllers.PERSONAL_INFO)
+  async getPersonalInfo(@AuthPayload() payload: AuthPayloadType) {
+    try {
+      return await this.usersService.getUserInfo(payload.userId);
     } catch (e) {
       this.throwHttpExeption(e);
     }

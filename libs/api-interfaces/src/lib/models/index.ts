@@ -8,3 +8,5 @@ export * from './language.model';
 export * from './picture.model';
 export * from './publisher.model';
 export * from './user.model';
+export * from './telephone.model';
+export * from './comment.model';

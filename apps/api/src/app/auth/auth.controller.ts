@@ -43,7 +43,6 @@ export class AuthController extends BaseController {
   @UseGuards(AccessTokenGuard)
   @Get('test')
   test(@Req() req: Request) {
-    console.log(req);
     return 'test';
   }
 

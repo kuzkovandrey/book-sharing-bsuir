@@ -8,7 +8,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "api": "nx serve api",
+    "api": "nx dev-watch api",
     "client": "nx serve book-sharing",
     "start:dev": "concurrently --names API,CLIENT --prefix-colors green,blue  \"yarn api\" \"yarn client\" "
   },

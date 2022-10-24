@@ -10,4 +10,5 @@ export enum TableNames {
   DELIVEIES = 'deliveries',
   OFFER_TYPES = 'offer_types',
   COMMENTS = 'comments',
+  TELEPHONES = 'telephones',
 }

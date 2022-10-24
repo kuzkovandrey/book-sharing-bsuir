@@ -1,0 +1,12 @@
+<div class="page signin">
+  <div
+    class="signin__form"
+    authForm
+    type="signin"
+    (onSubmit)="signin($event)"
+  ></div>
+
+  <p (click)="navigateToSignUp()" class="signin__link" appText>
+    Нет аккаунта? <app-link>Регистрация</app-link>
+  </p>
+</div>

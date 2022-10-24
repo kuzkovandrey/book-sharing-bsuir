@@ -26,6 +26,11 @@
               "with": "apps/api/src/environments/environment.prod.ts"
             }
           ]
+        },
+        "dev": {
+          "optimization": false,
+          "extractLicenses": true,
+          "inspect": true
         }
       }
     },
@@ -37,6 +42,17 @@
       "configurations": {
         "production": {
           "buildTarget": "api:build:production"
+        }
+      }
+    },
+    "dev-watch": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "api:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "api:build:dev"
         }
       }
     },

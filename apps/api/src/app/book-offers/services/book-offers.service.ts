@@ -49,6 +49,16 @@ export class BookOffersService {
     });
   }
 
+  findAllByUserId(id: number): Promise<BookOfferEntity[]> {
+    return this.bookOffersRepository.find({
+      where: {
+        user: { id },
+      },
+      select: this.selectOptions,
+      relations: this.findRelations,
+    });
+  }
+
   findById(id: number): Promise<BookOfferEntity> {
     return this.bookOffersRepository.findOneOrFail({
       where: { id },

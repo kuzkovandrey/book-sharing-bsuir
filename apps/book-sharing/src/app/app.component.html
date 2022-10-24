@@ -1,3 +1,6 @@
-<tui-root>
-  <router-outlet></router-outlet>
-</tui-root>
+<tui-loader [overlay]="true" [showLoader]="isLoading$ | async">
+  <tui-root>
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+  </tui-root>
+</tui-loader>

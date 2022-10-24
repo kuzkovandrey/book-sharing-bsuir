@@ -1,0 +1,31 @@
+<form [formGroup]="form" class="form">
+  <tui-input
+    *ngIf="isShowEmailField"
+    tuiTextfieldSize="s"
+    formControlName="email"
+  >
+    Емейл
+    <input tuiTextfield placeholder="email@example.com" type="email" />
+  </tui-input>
+
+  <tui-input tuiTextfieldSize="s" formControlName="username">
+    Логин
+    <input tuiTextfield type="text" />
+  </tui-input>
+
+  <tui-input-password formControlName="password" tuiTextfieldSize="s">
+    Пароль
+    <input tuiTextfield placeholder="Введите пароль" />
+  </tui-input-password>
+
+  <button
+    (click)="submitForm()"
+    tuiButton
+    [disabled]="!isValidForm"
+    type="button"
+    size="s"
+    appearance="primary"
+  >
+    {{ buttonText }}
+  </button>
+</form>

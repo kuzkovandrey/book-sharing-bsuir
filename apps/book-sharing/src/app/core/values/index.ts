@@ -1,11 +1,3 @@
-export enum AppRoutes {
-  ROOT = '/',
-  MAIN = 'main',
-  AUTH = 'auth',
-  SIGN_IN = 'signin',
-  SIGN_UP = 'signup',
-  PROFILE = 'profile',
-  BOOK_OFFER = 'book-offer',
-}
-
-export enum RouteQueryParams {}
+export * from './app-routes.enum';
+export * from './storage-keys.enum';
+export * from './route-query-params.enum';
