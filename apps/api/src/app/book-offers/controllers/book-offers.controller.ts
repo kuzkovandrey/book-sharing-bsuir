@@ -8,6 +8,7 @@ import { BookOffersService } from '../services';
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -87,5 +88,11 @@ export class BookOffersController extends BaseController {
     @AuthPayload() { userId }: AuthPayloadType
   ): Promise<CommentEntity> {
     return this.bookOffersService.createComment(offerId, userId, text);
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Delete(':id')
+  deleteBookOffer(@Param('id') offerId: number) {
+    return this.bookOffersService.delete(offerId);
   }
 }

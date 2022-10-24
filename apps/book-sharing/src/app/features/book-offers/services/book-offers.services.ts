@@ -52,4 +52,8 @@ export class BookOffersService {
   ): Observable<CommentModel> {
     return this.api.createComment(offerId, dto);
   }
+
+  delete(id: number): Observable<unknown> {
+    return this.api.delete(id);
+  }
 }

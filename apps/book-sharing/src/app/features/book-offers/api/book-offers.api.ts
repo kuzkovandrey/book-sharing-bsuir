@@ -70,4 +70,8 @@ export class BookOffersApi {
       body: dto,
     });
   }
+
+  delete(id: number): Observable<unknown> {
+    return this.api.delete({ url: `${ApiControllers.BOOK_OFFERS}/${id}` });
+  }
 }

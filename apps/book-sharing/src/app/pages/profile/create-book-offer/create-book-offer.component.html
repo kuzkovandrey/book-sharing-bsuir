@@ -177,5 +177,16 @@
     >
       {{ formButtonText }}
     </button>
+
+    <button
+      (click)="onClickDeleteButton()"
+      *ngIf="hasDeleteButton"
+      tuiButton
+      appearance="accent"
+      [size]="fieldSize"
+      type="button"
+    >
+      Удалить книгу
+    </button>
   </form>
 </section>

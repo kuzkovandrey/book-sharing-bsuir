@@ -82,6 +82,10 @@ export class CreateBookOfferComponent implements OnDestroy {
     return this.type !== 'edit';
   }
 
+  get hasDeleteButton(): boolean {
+    return this.type === 'edit';
+  }
+
   private readonly bookOffer: BookOfferModel;
 
   constructor(
@@ -256,5 +260,22 @@ export class CreateBookOfferComponent implements OnDestroy {
     } else {
       this.createBookOffer();
     }
+  }
+
+  onClickDeleteButton() {
+    this.loadingService.setLoading(true);
+
+    this.subscription.add(
+      this.bookOffersService.delete(this.bookOffer.id).subscribe({
+        next: () => {
+          this.router.navigate([AppRoutes.PROFILE]);
+          this.loadingService.setLoading(false);
+        },
+        error: ({ status }: HttpErrorResponse) => {
+          this.alertService.showError(`Ошибка удаления книги ${status}`);
+          this.loadingService.setLoading(false);
+        },
+      })
+    );
   }
 }
