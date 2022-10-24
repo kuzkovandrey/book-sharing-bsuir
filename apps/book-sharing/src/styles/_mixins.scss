@@ -19,7 +19,7 @@
 }
 
 @mixin tablet {
-  @media screen and (min-width: $tablet-langscape-min) {
+  @media screen and (max-width: $tablet-langscape-min) {
     @content;
   }
 }

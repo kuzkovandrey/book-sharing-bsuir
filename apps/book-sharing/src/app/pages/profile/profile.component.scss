@@ -14,4 +14,8 @@
   @include modifier(active) {
     font-weight: 700;
   }
+
+  @include mobile {
+    font: var(--tui-font-text-s);
+  }
 }

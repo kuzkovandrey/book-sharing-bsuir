@@ -8,6 +8,12 @@
   @include element(offer-list) {
     width: 100%;
   }
+
+  @include tablet {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
 }
 
 .offer-list {
