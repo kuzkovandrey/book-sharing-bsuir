@@ -1,0 +1,44 @@
+@import 'mixins';
+
+.card {
+  padding: 2rem;
+  border: 1px solid var(--tui-base-03);
+  border-radius: 2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+
+  @include element(preview) {
+  }
+
+  @include element(description) {
+  }
+}
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @include element(picture) {
+    width: 10rem;
+    height: 14rem;
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @include element(preview) {
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}

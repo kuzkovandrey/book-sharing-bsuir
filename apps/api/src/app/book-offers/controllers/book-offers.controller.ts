@@ -65,13 +65,10 @@ export class BookOffersController extends BaseController {
   }
 
   @UseGuards(AccessTokenGuard)
-  @Patch()
-  changeValues(
-    @Body() changes: ChangeOfferValuesDto,
-    @AuthPayload() { userId }: AuthPayloadType
-  ) {
+  @Patch(':id')
+  changeValues(@Body() changes: ChangeOfferValuesDto, @Param('id') id: number) {
     try {
-      return this.bookOffersService.changeValues(userId, changes);
+      return this.bookOffersService.changeValues(id, changes);
     } catch (e) {
       this.throwHttpExeption(e);
     }

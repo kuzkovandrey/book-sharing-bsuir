@@ -35,8 +35,11 @@ export class BookOffersService {
     return this.api.create(createBookOfferDto);
   }
 
-  changeValues(changes: ChangeOfferValuesDto): Observable<BookOfferModel> {
-    return this.api.changeValues(changes);
+  changeValues(
+    id: number,
+    changes: ChangeOfferValuesDto
+  ): Observable<BookOfferModel> {
+    return this.api.changeValues(id, changes);
   }
 
   getAllComments(offerId: number): Observable<CommentModel[]> {

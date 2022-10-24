@@ -30,13 +30,28 @@
     <button tuiButton type="button" appearance="secondary">Изменить</button>
   </div>
 
-  <div class="user-info__offer-list">
+  <div class="user-info__offer-list offer-list">
     <h4
       appSubtitle
       class="offer-list__title"
       *ngIf="bookOffers && !bookOffers.length"
     >
-      <span appLink>Добавьте</span> свою первую книгу
+      <span appLink (click)="navigateToCreateBookOffer()">Добавьте</span> свою
+      первую книгу
     </h4>
+
+    <ng-container *ngIf="bookOffers && bookOffers.length">
+      <h4 appSubtitle>Мои книги</h4>
+
+      <ng-container *ngFor="let bookOffer of bookOffers">
+        <div
+          class="offer-list__book-offer"
+          (changeButtonClick)="navigateToChangeBookOffer($event)"
+          appBookOfferCard
+          [hasCollectionButton]="false"
+          [bookOffer]="bookOffer"
+        ></div>
+      </ng-container>
+    </ng-container>
   </div>
 </div>

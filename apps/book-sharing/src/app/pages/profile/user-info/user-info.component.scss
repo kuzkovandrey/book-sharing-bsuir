@@ -3,6 +3,7 @@
 .user-info {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 
   @include element(offer-list) {
     width: 100%;
@@ -10,9 +11,18 @@
 }
 
 .offer-list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+
   @include element(title) {
     width: 100%;
     text-align: center;
+  }
+
+  @include element(book-offer) {
+    width: 100%;
   }
 }
 

@@ -1,0 +1,181 @@
+<section class="page create-page">
+  <form class="form" [formGroup]="offerForm">
+    <div *ngIf="isShowBookForm" class="form" formGroupName="book">
+      <tui-input [tuiTextfieldSize]="fieldSize" formControlName="title">
+        Название
+        <input tuiTextfield type="text" />
+      </tui-input>
+
+      <tui-input [tuiTextfieldSize]="fieldSize" formControlName="description">
+        Описание книги
+      </tui-input>
+
+      <div class="form__row">
+        <tui-input [tuiTextfieldSize]="fieldSize" formControlName="pageCount">
+          Кол-во страниц
+          <input tuiTextfield type="number" />
+        </tui-input>
+
+        <tui-input
+          [tuiTextfieldSize]="fieldSize"
+          formControlName="publicationYear"
+        >
+          Год публикации
+          <input tuiTextfield type="number" />
+        </tui-input>
+      </div>
+
+      <div class="form__row">
+        <tui-input [tuiTextfieldSize]="fieldSize" formControlName="language">
+          Язык
+          <input tuiTextfield type="text" />
+        </tui-input>
+
+        <tui-input [tuiTextfieldSize]="fieldSize" formControlName="genre">
+          Жанр
+          <input tuiTextfield type="text" />
+        </tui-input>
+
+        <tui-input [tuiTextfieldSize]="fieldSize" formControlName="publisher">
+          Издательство
+          <input tuiTextfield type="text" />
+        </tui-input>
+      </div>
+    </div>
+
+    <ul *ngIf="isShowBookForm" class="list">
+      <li *ngIf="!pictures.length">Необходим минимум один картинка</li>
+
+      <li class="list__item" *ngFor="let picture of pictures; index as i">
+        {{ i + 1 }}. {{ picture }}
+        <button
+          (click)="removePicture(i)"
+          tuiButton
+          appearance="secondary-destructive"
+          [size]="fieldSize"
+        >
+          Удалить
+        </button>
+      </li>
+    </ul>
+
+    <form *ngIf="isShowBookForm" [formGroup]="pictureForm" class="form">
+      <tui-input
+        [tuiTextfieldSize]="fieldSize"
+        class="form__input"
+        formControlName="url"
+      >
+        Ссылка
+        <input tuiTextfield type="text" />
+      </tui-input>
+
+      <button
+        [disabled]="pictureForm.invalid"
+        tuiButton
+        appearance="primary"
+        [size]="fieldSize"
+        (click)="addPicture()"
+        type="button"
+      >
+        Добавить ссылку
+      </button>
+    </form>
+
+    <ul *ngIf="isShowBookForm" class="list">
+      <li *ngIf="!authors.length">Необходим минимум один автор</li>
+
+      <li class="list__item" *ngFor="let author of authors; index as i">
+        {{ i + 1 }}. {{ author.firstName }} {{ author.lastName }}
+        <button
+          (click)="removeAuthor(i)"
+          tuiButton
+          appearance="secondary-destructive"
+          size="xs"
+        >
+          Удалить
+        </button>
+      </li>
+    </ul>
+
+    <form *ngIf="isShowBookForm" [formGroup]="authorForm" class="form">
+      <tui-input
+        [tuiTextfieldSize]="fieldSize"
+        class="form__input"
+        formControlName="firstName"
+      >
+        Имя
+        <input tuiTextfield type="text" />
+      </tui-input>
+
+      <tui-input
+        [tuiTextfieldSize]="fieldSize"
+        class="form__input"
+        formControlName="lastName"
+      >
+        Фамилия
+        <input tuiTextfield type="text" />
+      </tui-input>
+
+      <button
+        [disabled]="authorForm.invalid"
+        tuiButton
+        appearance="primary"
+        [size]="fieldSize"
+        (click)="addAuthor()"
+        type="button"
+      >
+        Добавить автора
+      </button>
+    </form>
+
+    <tui-select
+      [stringify]="stringifyDeliveryTypes"
+      [tuiTextfieldSize]="fieldSize"
+      formControlName="deliveryType"
+    >
+      Условия обмена
+      <input tuiTextfield placeholder="offerType" />
+      <tui-data-list-wrapper
+        *tuiDataList
+        [items]="deliveryTypeTexts"
+        [itemContent]="stringifyDeliveryTypes | tuiStringifyContent"
+      ></tui-data-list-wrapper>
+    </tui-select>
+
+    <tui-select
+      [stringify]="stringifyOfferType"
+      [tuiTextfieldSize]="fieldSize"
+      formControlName="offerType"
+    >
+      Условия обмена
+      <input tuiTextfield placeholder="offerType" />
+      <tui-data-list-wrapper
+        *tuiDataList
+        [items]="offerTypeTexts"
+        [itemContent]="stringifyOfferType | tuiStringifyContent"
+      ></tui-data-list-wrapper>
+    </tui-select>
+
+    <div>
+      <tui-toggle formControlName="isActive" size="l"></tui-toggle>
+      <span>Объявление активно?</span>
+    </div>
+
+    <tui-input [tuiTextfieldSize]="fieldSize" formControlName="info">
+      Дополнительная информация об условиях, контакты, время связи
+    </tui-input>
+
+    <ng-container *ngIf="type === 'create'"> </ng-container>
+
+    <button
+      (click)="onSubmitForm()"
+      [disabled]="type === 'create' ? !isValidForm : !isValidEditForm"
+      tuiButton
+      appearance="primary"
+      [size]="fieldSize"
+      type="button"
+    >
+      {{ formButtonText }}
+    </button>
+  </form>
+</section>

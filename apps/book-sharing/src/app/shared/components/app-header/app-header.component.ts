@@ -17,4 +17,8 @@ export class AppHeaderComponent implements OnInit {
   navigateToAuth() {
     this.router.navigate([AppRoutes.AUTH]);
   }
+
+  navigateToMainPage() {
+    this.router.navigate([AppRoutes.MAIN]);
+  }
 }

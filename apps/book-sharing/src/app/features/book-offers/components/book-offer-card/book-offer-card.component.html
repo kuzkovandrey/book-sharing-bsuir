@@ -1,0 +1,40 @@
+<div *ngIf="bookOffer" class="card">
+  <div class="card__preview preview">
+    <span [ngStyle]="pictureStyles" class="preview__picture"></span>
+
+    <button
+      *ngIf="hasCollectionButton; else changeButton"
+      tuiButton
+      appearance="primary"
+      size="s"
+      type="button"
+    >
+      Добавить
+    </button>
+
+    <ng-template #changeButton>
+      <button
+        (click)="onClickChangeButton()"
+        tuiButton
+        appearance="primary"
+        size="s"
+        type="button"
+      >
+        Изменить
+      </button>
+    </ng-template>
+  </div>
+
+  <div class="card__description description">
+    <div class="row">
+      <tui-tag size="l" [value]="deliveryType"></tui-tag>
+      <tui-tag size="l" [value]="offerType"></tui-tag>
+    </div>
+
+    <h5 appSubtitle>{{ bookOffer.book.title }}</h5>
+    <p appText>{{ bookOffer.book.description }}</p>
+    <p appText>{{ bookOffer.info }}</p>
+
+    <span appLink>Подробнее</span>
+  </div>
+</div>

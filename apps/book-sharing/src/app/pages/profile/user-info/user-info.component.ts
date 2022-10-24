@@ -1,3 +1,5 @@
+import { AppRoutes } from '@core/values';
+import { Router } from '@angular/router';
 import { LoadingService, AlertService } from '@core/services';
 import { UserModel, BookOfferModel } from '@book-sharing/api-interfaces';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -21,7 +23,8 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   constructor(
     private readonly loadingService: LoadingService,
     private readonly alertService: AlertService,
-    private readonly userInfoFacade: UserInfoFacade
+    private readonly userInfoFacade: UserInfoFacade,
+    private readonly router: Router
   ) {}
 
   ngOnInit() {
@@ -48,5 +51,17 @@ export class UserInfoComponent implements OnInit, OnDestroy {
         },
       })
     );
+  }
+
+  navigateToCreateBookOffer() {
+    this.router.navigate([AppRoutes.PROFILE, AppRoutes.CREATE], {
+      state: { type: 'create' },
+    });
+  }
+
+  navigateToChangeBookOffer(bookOffer: BookOfferModel) {
+    this.router.navigate([AppRoutes.PROFILE, AppRoutes.CREATE], {
+      state: { type: 'edit', bookOffer },
+    });
   }
 }

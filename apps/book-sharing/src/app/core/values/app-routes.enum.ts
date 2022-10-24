@@ -9,4 +9,5 @@ export enum AppRoutes {
   USER_INFO = 'user-info',
   USER_BOOK_OFFERS = 'user-book-offers',
   BOOK_COLLECTIONS = 'book-collections',
+  CREATE = 'create',
 }

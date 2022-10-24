@@ -45,8 +45,14 @@ export class BookOffersApi {
     });
   }
 
-  changeValues(changes: ChangeOfferValuesDto): Observable<BookOfferModel> {
-    return this.api.patch({ url: ApiControllers.BOOK_OFFERS, body: changes });
+  changeValues(
+    id: number,
+    changes: ChangeOfferValuesDto
+  ): Observable<BookOfferModel> {
+    return this.api.patch({
+      url: `${ApiControllers.BOOK_OFFERS}/${id}`,
+      body: changes,
+    });
   }
 
   getAllComments(offerId: number): Observable<CommentModel[]> {

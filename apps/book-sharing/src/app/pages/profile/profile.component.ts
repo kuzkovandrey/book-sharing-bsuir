@@ -16,6 +16,10 @@ export class ProfileComponent implements OnInit {
       path: AppRoutes.BOOK_COLLECTIONS,
       name: 'Мои закладки',
     },
+    {
+      path: AppRoutes.CREATE,
+      name: 'Добавить книгу',
+    },
   ] as const;
 
   constructor() {}

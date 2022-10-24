@@ -10,6 +10,7 @@
 
   @include element(logo) {
     font: var(--tui-font-heading-4);
+    cursor: pointer;
   }
 
   @include element(auth) {

@@ -1,0 +1,33 @@
+@import 'mixins';
+@import 'vars';
+
+.form {
+  max-width: 700px;
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+
+  @include element(row) {
+    display: flex;
+
+    @include mobile {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    & > * {
+      width: 100%;
+    }
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  @include element(item) {
+  }
+}

@@ -2493,6 +2493,11 @@
     text-mask-core "^5.0.0"
     tslib "^2.0.0"
 
+"@taiga-ui/styles@^3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@taiga-ui/styles/-/styles-3.8.0.tgz#beb5356618021a37ad32972de83aa3f189390dfa"
+  integrity sha512-iZYto2OcW7wF2RZ0xV1IliaL0CqwUZM9sZiMtpUdmDQgZGRkMcoGtx9xrF549IkFN2eyQ+Nnuvxp7hOZ/afjVA==
+
 "@tinkoff/ng-event-plugins@3.0.0":
   version "3.0.0"
   resolved "https://registry.npmjs.org/@tinkoff/ng-event-plugins/-/ng-event-plugins-3.0.0.tgz"
@@ -2500,7 +2505,7 @@
   dependencies:
     tslib "^2.2.0"
 
-"@tinkoff/ng-polymorpheus@4.0.7":
+"@tinkoff/ng-polymorpheus@4.0.7", "@tinkoff/ng-polymorpheus@^4.0.7":
   version "4.0.7"
   resolved "https://registry.npmjs.org/@tinkoff/ng-polymorpheus/-/ng-polymorpheus-4.0.7.tgz"
   integrity sha512-+Gbwk9vfJVNbN1qy0L3pV+QW1sBkLfyAC1DsEdgSS3+c2qa2UEzDma5NTsaBbKoGTr3B3Qlryly8cTSz0JMLAQ==
