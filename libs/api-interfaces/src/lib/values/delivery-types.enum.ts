@@ -13,5 +13,8 @@ export const deliveryTypeToText = (type: DeliveryTypes): string => {
 
   if (text) return text;
 
-  throw new Error('Type is missing');
+  return 'Любые';
 };
+
+export const stringifyDeliveryTypes = (type: DeliveryTypes) =>
+  deliveryTypeToText(type);

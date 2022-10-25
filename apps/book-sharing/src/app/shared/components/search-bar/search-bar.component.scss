@@ -1,0 +1,11 @@
+@import 'mixins';
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+
+  @include element(input) {
+    width: 100%;
+  }
+}

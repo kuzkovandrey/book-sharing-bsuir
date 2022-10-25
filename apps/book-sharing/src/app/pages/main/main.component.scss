@@ -1,0 +1,11 @@
+@import 'mixins';
+
+.main {
+  @include element(search-bar) {
+    margin-bottom: 1rem;
+  }
+
+  @include element(search-filter) {
+    margin-bottom: 1rem;
+  }
+}

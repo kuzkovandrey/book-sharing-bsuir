@@ -19,11 +19,19 @@ export class BookOffersApi {
     return this.api.get({ url: ApiControllers.BOOK_OFFERS });
   }
 
-  search(params: BookOfferSearchParams): Observable<BookOfferModel[]> {
+  search({
+    isActive,
+    deliveryType,
+    offerType,
+    text,
+  }: BookOfferSearchParams): Observable<BookOfferModel[]> {
     return this.api.get({
       url: `${ApiControllers.BOOK_OFFERS}${ApiControllers.SEARCH}`,
       params: {
-        ...params,
+        ...(isActive ? { isActive } : {}),
+        ...(deliveryType ? { deliveryType } : {}),
+        ...(offerType ? { offerType } : {}),
+        ...(text ? { text } : {}),
       },
     });
   }

@@ -13,5 +13,9 @@ export const offerTypeToText = (type: OfferType): string => {
     [OfferType.DESIRE]: 'Хочу',
   }[type];
 
-  return `${text} книгу`;
+  if (text) return `${text} книгу`;
+
+  return `Любые`;
 };
+
+export const stringifyOfferType = (type: OfferType) => offerTypeToText(type);

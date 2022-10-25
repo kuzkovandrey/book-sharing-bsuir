@@ -1,0 +1,19 @@
+<div class="search">
+  <tui-input
+    class="search__input"
+    tuiTextfieldSize="m"
+    [tuiTextfieldSize]="size"
+    [formControl]="searchControl"
+  >
+    Название книги
+    <input tuiTextfield type="text" />
+  </tui-input>
+
+  <button
+    (click)="onClickSearchButton()"
+    tuiIconButton
+    [size]="size"
+    type="button"
+    icon="tuiIconSearch"
+  ></button>
+</div>

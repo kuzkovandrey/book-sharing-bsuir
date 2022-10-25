@@ -68,15 +68,12 @@ export class BookOffersService {
   }
   search(
     text: string,
-    { username, isActive, deliveryType, offerType }: BookOfferSearchParams = {}
+    { isActive, deliveryType, offerType }: BookOfferSearchParams = {}
   ) {
     return this.bookOffersRepository.find({
       where: {
         book: {
           ...(text ? { title: Like(`%${text}%`) } : {}),
-        },
-        user: {
-          ...(username ? { username } : {}),
         },
         ...(isActive !== undefined ? { isActive } : {}),
         ...(deliveryType !== undefined ? { deliveryType } : {}),

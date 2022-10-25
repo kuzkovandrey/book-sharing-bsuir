@@ -1,1 +1,20 @@
-<div class="page"></div>
+<div class="page main">
+  <div class="main__search-bar" appSearchBar (search)="search($event)"></div>
+  <div
+    class="main__search-filter"
+    appSearchFilter
+    (filterChanges)="onFilterChanges($event)"
+  ></div>
+
+  <div *ngIf="resultList && resultList.length" class="result-list">
+    <section
+      *ngFor="let offer of resultList"
+      appBookOfferCard
+      [bookOffer]="offer"
+    ></section>
+  </div>
+
+  <h5 *ngIf="resultList && !resultList.length" appSubtitle>
+    По вашему запросу ничего не найдено
+  </h5>
+</div>

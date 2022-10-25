@@ -1,0 +1,34 @@
+<form [formGroup]="filterForm" class="filter row">
+  <tui-select
+    [stringify]="stringifyDeliveryTypes"
+    [tuiTextfieldSize]="fieldSize"
+    formControlName="deliveryType"
+  >
+    Условия доставки
+    <input tuiTextfield placeholder="deliveryType" />
+    <tui-data-list-wrapper
+      *tuiDataList
+      [items]="deliveryTypeTexts"
+      [itemContent]="stringifyDeliveryTypes | tuiStringifyContent"
+    ></tui-data-list-wrapper>
+  </tui-select>
+
+  <tui-select
+    [stringify]="stringifyOfferType"
+    [tuiTextfieldSize]="fieldSize"
+    formControlName="offerType"
+  >
+    Условия обмена
+    <input tuiTextfield placeholder="offerType" />
+    <tui-data-list-wrapper
+      *tuiDataList
+      [items]="offerTypeTexts"
+      [itemContent]="stringifyOfferType | tuiStringifyContent"
+    ></tui-data-list-wrapper>
+  </tui-select>
+
+  <div class="row">
+    <tui-toggle formControlName="isActive" size="l"></tui-toggle>
+    <span>Объявление активно?</span>
+  </div>
+</form>

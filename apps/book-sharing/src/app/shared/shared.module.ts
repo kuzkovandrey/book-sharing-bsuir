@@ -25,6 +25,8 @@ import { TitleComponent } from './components/title/title.component';
 import { SubtitleComponent } from './components/subtitle/subtitle.component';
 import { TextComponent } from './components/text/text.component';
 import { LinkComponent } from './components/link/link.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 
 @NgModule({
   imports: [
@@ -52,6 +54,8 @@ import { LinkComponent } from './components/link/link.component';
     SubtitleComponent,
     TextComponent,
     LinkComponent,
+    SearchBarComponent,
+    SearchFilterComponent,
   ],
   exports: [
     AppHeaderComponent,
@@ -75,6 +79,8 @@ import { LinkComponent } from './components/link/link.component';
     TuiFilterPipeModule,
     TuiTagModule,
     TuiInputPasswordModule,
+    SearchBarComponent,
+    SearchFilterComponent,
   ],
 })
 export class SharedModule {}
