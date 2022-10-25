@@ -5,7 +5,7 @@ import { AppRoutes } from '@core/values';
 import { AlertService, LoadingService } from '@core/services';
 import { AuthService } from '@features/auth';
 import { Subscription } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'signup',
@@ -39,9 +39,16 @@ export class SignupComponent implements OnDestroy {
           this.router.navigate([AppRoutes.PROFILE]);
           this.loadingService.setLoading(false);
         },
-        error: (e: HttpErrorResponse) => {
+        error: ({ status }: HttpErrorResponse) => {
           this.loadingService.setLoading(false);
-          this.alertService.showError(`Произошла ошибка ${e.status}`);
+
+          if (status === HttpStatusCode.BadRequest) {
+            this.alertService.showError(
+              `Пользователь с таким username уже существует`
+            );
+          } else {
+            this.alertService.showError(`Ошибка ${status}, попробуйте позже `);
+          }
         },
       })
     );

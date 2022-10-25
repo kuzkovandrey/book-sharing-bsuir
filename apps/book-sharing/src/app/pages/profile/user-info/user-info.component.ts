@@ -1,7 +1,7 @@
 import { AppRoutes } from '@core/values';
 import { Router } from '@angular/router';
 import { LoadingService, AlertService } from '@core/services';
-import { UserModel, BookOfferModel } from '@book-sharing/api-interfaces';
+import { UserModel, BookOfferModel, User } from '@book-sharing/api-interfaces';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -62,6 +62,12 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   navigateToChangeBookOffer(bookOffer: BookOfferModel) {
     this.router.navigate([AppRoutes.PROFILE, AppRoutes.CREATE], {
       state: { type: 'edit', bookOffer },
+    });
+  }
+
+  navigateToChangeUserInfo(user: User) {
+    this.router.navigate([AppRoutes.PROFILE, AppRoutes.CHANGE_INFO], {
+      state: { user },
     });
   }
 }

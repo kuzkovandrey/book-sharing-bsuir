@@ -18,6 +18,10 @@ export class AppHeaderComponent implements OnInit {
     this.router.navigate([AppRoutes.AUTH]);
   }
 
+  navigateToProfile() {
+    this.router.navigate([AppRoutes.PROFILE]);
+  }
+
   navigateToMainPage() {
     this.router.navigate([AppRoutes.MAIN]);
   }

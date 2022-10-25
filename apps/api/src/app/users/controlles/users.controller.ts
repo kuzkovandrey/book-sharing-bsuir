@@ -42,7 +42,7 @@ export class UsersController extends BaseController {
   }
 
   @UseGuards(AccessTokenGuard)
-  @Patch()
+  @Patch(ApiControllers.PERSONAL_INFO)
   async changeValues(
     @Body() changes: Partial<Omit<CreateUserDto, 'refreshToken'>>,
     @AuthPayload() { userId }: AuthPayloadType

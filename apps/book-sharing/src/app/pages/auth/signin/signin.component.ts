@@ -1,4 +1,4 @@
-import { AlertService } from './../../../core/services/alert.service';
+import { AlertService } from '@core/services/alert.service';
 import { AuthDto } from '@book-sharing/api-interfaces';
 import { AuthService } from '@features/auth';
 import { LoadingService } from '@core/services';
@@ -6,7 +6,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRoutes } from '@core/values';
 import { Subscription, switchMap } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'signin',
@@ -40,9 +40,14 @@ export class SigninComponent implements OnDestroy {
           this.router.navigate([AppRoutes.PROFILE]);
           this.loadingService.setLoading(false);
         },
-        error: (e: HttpErrorResponse) => {
+        error: ({ status }: HttpErrorResponse) => {
           this.loadingService.setLoading(false);
-          this.alertService.showError(`Произошла ошибка ${e.status}`);
+
+          if (status === HttpStatusCode.BadRequest) {
+            this.alertService.showError(`Неправльный логин или пароль`);
+          } else {
+            this.alertService.showError(`Произошла ошибка ${status}`);
+          }
         },
       })
     );

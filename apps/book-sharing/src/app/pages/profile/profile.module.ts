@@ -1,5 +1,4 @@
-import { BookOfferCardComponent } from './../../features/book-offers/components/book-offer-card/book-offer-card.component';
-import { TuiFilterPipeModule } from '@taiga-ui/cdk';
+import { BookOfferCardComponent } from '@features/book-offers/components/book-offer-card/book-offer-card.component';
 import { AppRoutes } from '@core/values';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -7,28 +6,12 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { ProfileComponent } from './profile.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
-import { TuiAvatarModule } from '@taiga-ui/kit';
 import { BookCollectionsComponent } from './book-collections/book-collections.component';
 import { CreateBookOfferComponent } from './create-book-offer/create-book-offer.component';
-import {
-  TuiDialogContext,
-  TuiDataListModule,
-  TuiTextfieldControllerModule,
-  TuiButtonModule,
-} from '@taiga-ui/core';
-import {
-  TuiComboBoxModule,
-  TuiDataListWrapperModule,
-  tuiItemsHandlersProvider,
-  TuiInputModule,
-  TuiTextAreaModule,
-  TuiToggleModule,
-  TuiMultiSelectModule,
-  TuiSelectModule,
-  TuiStringifyContentPipeModule,
-  TuiFilterModule,
-} from '@taiga-ui/kit';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChangeUserInfoComponent } from './change-user-info/change-user-info.component';
+import { UserFormComponent } from '@features/user/components';
+import { UserInfoCardComponent } from '@features/user/components/user-info-card/user-info-card.component';
 
 const routes: Routes = [
   {
@@ -52,6 +35,10 @@ const routes: Routes = [
         path: AppRoutes.CREATE,
         component: CreateBookOfferComponent,
       },
+      {
+        path: AppRoutes.CHANGE_INFO,
+        component: ChangeUserInfoComponent,
+      },
     ],
   },
 ];
@@ -63,6 +50,8 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     BookOfferCardComponent,
+    UserFormComponent,
+    UserInfoCardComponent,
   ],
   exports: [RouterModule],
   declarations: [
@@ -70,6 +59,7 @@ const routes: Routes = [
     UserInfoComponent,
     BookCollectionsComponent,
     CreateBookOfferComponent,
+    ChangeUserInfoComponent,
   ],
 })
 export class ProfileModule {}

@@ -1,0 +1,22 @@
+@import 'mixins';
+
+.info {
+  padding: 2rem;
+  border: 1px solid var(--tui-base-03);
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+
+  @include element(avatar) {
+    align-self: center;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}

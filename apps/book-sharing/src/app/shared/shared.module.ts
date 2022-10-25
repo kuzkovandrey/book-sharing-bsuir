@@ -14,6 +14,7 @@ import {
   TuiToggleModule,
   TuiStringifyContentPipeModule,
   TuiTagModule,
+  TuiInputPasswordModule,
 } from '@taiga-ui/kit';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -43,6 +44,7 @@ import { LinkComponent } from './components/link/link.component';
     TuiStringifyContentPipeModule,
     TuiFilterPipeModule,
     TuiTagModule,
+    TuiInputPasswordModule,
   ],
   declarations: [
     AppHeaderComponent,
@@ -72,6 +74,7 @@ import { LinkComponent } from './components/link/link.component';
     TuiStringifyContentPipeModule,
     TuiFilterPipeModule,
     TuiTagModule,
+    TuiInputPasswordModule,
   ],
 })
 export class SharedModule {}

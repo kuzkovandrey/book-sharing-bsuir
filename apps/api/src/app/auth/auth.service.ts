@@ -3,12 +3,7 @@ import {
   IncorrectUserAuthError,
   AccessDeniedError,
 } from './../core/base/errors';
-import {
-  BadRequestException,
-  ForbiddenException,
-  Inject,
-  Injectable,
-} from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto, AuthDto, TokenDto } from '@book-sharing/api-interfaces';
 import { UsersService } from '@users/services';
 import * as argon2 from 'argon2';

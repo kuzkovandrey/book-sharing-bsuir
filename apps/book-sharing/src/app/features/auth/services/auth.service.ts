@@ -2,7 +2,7 @@ import { AuthDto, CreateUserDto, TokenDto } from '@book-sharing/api-interfaces';
 import { AuthApi } from '../api';
 import { Injectable } from '@angular/core';
 import { AppStorageService } from '@core/services/storage';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, tap, Observable } from 'rxjs';
 import { StorageKeys } from '@core/values';
 
 @Injectable({
@@ -12,6 +12,10 @@ export class AuthService {
   private readonly isAuthorized = new BehaviorSubject<boolean>(
     !!this.getToken(StorageKeys.ACCESS_TOKEN)
   );
+
+  get isAuthorized$(): Observable<boolean> {
+    return this.isAuthorized.asObservable();
+  }
 
   constructor(
     private readonly authApi: AuthApi,

@@ -2,7 +2,11 @@ import { map, Observable, switchMap } from 'rxjs';
 import { BookOffersService } from '@features/book-offers/services/book-offers.services';
 import { UserService } from '@features/user/services/user.service';
 import { Injectable } from '@angular/core';
-import { UserModel, BookOfferModel } from '@book-sharing/api-interfaces';
+import {
+  UserModel,
+  BookOfferModel,
+  CreateUserDto,
+} from '@book-sharing/api-interfaces';
 
 export interface UserInfoWithOffers {
   user: UserModel;
@@ -24,5 +28,11 @@ export class UserInfoFacade {
           .pipe(map((bookOffers) => ({ bookOffers, user })));
       })
     );
+  }
+
+  changeUserInfo(
+    changes: Partial<Omit<CreateUserDto, 'refreshToken'>>
+  ): Observable<UserModel> {
+    return this.userService.updateUserInfo(changes);
   }
 }

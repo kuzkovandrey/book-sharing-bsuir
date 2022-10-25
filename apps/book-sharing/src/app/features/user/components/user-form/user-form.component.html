@@ -1,0 +1,61 @@
+<form class="form" [formGroup]="form">
+  <tui-input [tuiTextfieldSize]="fieldSize" formControlName="username">
+    Никнейм
+    <input tuiTextfield type="text" />
+  </tui-input>
+
+  <tui-input [tuiTextfieldSize]="fieldSize" formControlName="email">
+    Емейл
+    <input tuiTextfield type="email" />
+  </tui-input>
+
+  <tui-input-password [tuiTextfieldSize]="fieldSize" formControlName="password">
+    Новый пароль
+    <input tuiTextfield placeholder="Введите новый пароль" />
+  </tui-input-password>
+
+  <ul *ngIf="telephones.length" class="list">
+    <li class="list__item" *ngFor="let tel of telephones; index as i">
+      {{ i + 1 }}. {{ tel }}
+      <button
+        (click)="removeTel(i)"
+        tuiButton
+        appearance="secondary-destructive"
+        size="xs"
+      >
+        Удалить
+      </button>
+    </li>
+  </ul>
+
+  <tui-input
+    [tuiTextfieldSize]="fieldSize"
+    class="form__input"
+    [formControl]="telephoneControl"
+  >
+    Телефон
+    <input tuiTextfield type="text" />
+  </tui-input>
+
+  <button
+    [disabled]="telephoneControl.invalid"
+    tuiButton
+    appearance="primary"
+    [size]="fieldSize"
+    (click)="addTel()"
+    type="button"
+  >
+    Добавить телефон
+  </button>
+
+  <button
+    [disabled]="form.invalid"
+    tuiButton
+    appearance="accent"
+    [size]="fieldSize"
+    (click)="onCLickChanges()"
+    type="button"
+  >
+    Изменить информацию
+  </button>
+</form>

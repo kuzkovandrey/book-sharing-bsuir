@@ -1,36 +1,8 @@
 <div class="user-info" *ngIf="user">
-  <div class="info">
-    <tui-avatar
-      class="info__avatar"
-      [text]="user.email[0]"
-      size="xl"
-      [rounded]="true"
-    ></tui-avatar>
-
-    <div class="row">
-      <h4 appSubtitle>Никнейм:</h4>
-      <p appText>{{ user.username }}</p>
-    </div>
-
-    <div class="row">
-      <h4 appSubtitle>Емейл:</h4>
-      <p appText>{{ user.email }}</p>
-    </div>
-
-    <ng-container *ngIf="user.telephones.length">
-      <h4 appSubtitle>Телефоны:</h4>
-
-      <ul class="tui-list tui-list_small">
-        <ng-container *ngFor="let tel of user.telephones">
-          <li class="tui-list__item" appText>* {{ tel.telephoneNumber }}</li>
-        </ng-container>
-      </ul>
-    </ng-container>
-
-    <button tuiButton size="m" type="button" appearance="secondary">
-      Изменить
-    </button>
-  </div>
+  <app-user-info-card
+    [user]="user"
+    (onClickChangeButton)="navigateToChangeUserInfo($event)"
+  ></app-user-info-card>
 
   <div class="user-info__offer-list offer-list">
     <h4
