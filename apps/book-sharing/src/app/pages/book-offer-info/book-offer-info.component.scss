@@ -20,6 +20,15 @@
   @include element(image) {
     width: 20rem;
     height: 28rem;
+
+    @include tablet {
+      width: 15rem;
+      height: 22rem;
+    }
+  }
+
+  @include mobile {
+    flex-direction: column;
   }
 }
 
@@ -36,6 +45,10 @@
     padding: 1rem;
     border: 1px solid var(--tui-base-03);
     border-radius: 2rem;
+  }
+
+  @include tablet {
+    flex-direction: column;
   }
 }
 
