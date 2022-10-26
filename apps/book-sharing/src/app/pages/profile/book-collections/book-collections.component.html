@@ -5,6 +5,7 @@
       [hasCollectionButton]="true"
       [inCollection]="offer.inCollection"
       (detailsClick)="navigateToOfferDetails($event)"
+      (collectionButtonClick)="toggleCollectionState(offer)"
       [bookOffer]="offer"
     ></app-book-offer-card>
   </div>

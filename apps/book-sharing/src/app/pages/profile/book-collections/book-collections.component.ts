@@ -47,6 +47,10 @@ export class BookCollectionsComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
+  toggleCollectionState(offer: ModelWithCollectionState<BookOfferModel>) {
+    this.userInfoFacade.toggleCollectionState(offer);
+  }
+
   navigateToOfferDetails(id: number) {
     this.router.navigate([AppRoutes.BOOK_OFFER, id]);
   }
