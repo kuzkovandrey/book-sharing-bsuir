@@ -1,0 +1,8 @@
+<div class="comment">
+  <div class="row">
+    <p appText>{{ comment.user.username }}, {{ comment.user.email }}</p>
+    <p appText>{{ comment.createdAt | date }}</p>
+  </div>
+
+  <p class="comment__text">{{ comment.text }}</p>
+</div>

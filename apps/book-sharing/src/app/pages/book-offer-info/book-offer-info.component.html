@@ -1,0 +1,43 @@
+<div class="page">
+  <div *ngIf="bookOffer" class="offer">
+    <img class="offer__image" [src]="bookOffer.book.pictures[0].url" />
+
+    <app-book-description [book]="bookOffer.book"></app-book-description>
+  </div>
+
+  <carousel
+    *ngIf="images && images.length > 1"
+    [height]="300"
+    class="carousel"
+    [images]="images"
+  ></carousel>
+
+  <div *ngIf="bookOffer" class="additional">
+    <app-offer-details [bookOffer]="bookOffer"></app-offer-details>
+
+    <div class="additional__comments comments">
+      <div class="comments__list">
+        <section
+          *ngFor="let comment of commentList"
+          appCommentCard
+          [comment]="comment"
+        ></section>
+      </div>
+
+      <ng-container *ngIf="hasCommentForm$ | async; else authText">
+        <div
+          class="comments__form"
+          appCommentForm
+          (submitForm)="addComment($event)"
+        ></div>
+      </ng-container>
+
+      <ng-template #authText>
+        <p appSubtitle>
+          <span (click)="navigateToAuth()" appLink>Авторизуйтесь</span>
+          , чтобы оставить комментарий.
+        </p>
+      </ng-template>
+    </div>
+  </div>
+</div>

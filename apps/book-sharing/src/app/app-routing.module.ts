@@ -25,6 +25,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/profile/profile.module').then((m) => m.ProfileModule),
   },
+  {
+    path: `${AppRoutes.BOOK_OFFER}`,
+    loadChildren: () =>
+      import('./pages/book-offer-info/book-offer-info.module').then(
+        (m) => m.BookOfferInfoModule
+      ),
+  },
 ];
 
 @NgModule({

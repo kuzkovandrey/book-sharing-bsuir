@@ -9,7 +9,7 @@
       size="s"
       type="button"
     >
-      Добавить
+      В закладки
     </button>
 
     <ng-template #changeButton>
@@ -41,6 +41,6 @@
     <p appText>{{ bookOffer.book.description }}</p>
     <p appText>{{ bookOffer.info }}</p>
 
-    <span appLink>Подробнее</span>
+    <span (click)="onClickDetails()" appLink>Подробнее</span>
   </div>
 </div>

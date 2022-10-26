@@ -1,0 +1,14 @@
+<div *ngIf="bookOffer" class="details">
+  <p appText>Объявление № {{ bookOffer.id }}</p>
+  <p appText>Добавлено: {{ bookOffer.createdAt | date }}</p>
+  <p appText>Пользователь: {{ bookOffer.user.username }}</p>
+  <p appText>Контакты:</p>
+  <a appText>{{ bookOffer.user.email }}</a>
+  <div *ngIf="bookOffer.user?.telephones?.length">
+    <ul>
+      <li *ngFor="let tel of bookOffer.user.telephones">
+        {{ tel.telephoneNumber }}
+      </li>
+    </ul>
+  </div>
+</div>

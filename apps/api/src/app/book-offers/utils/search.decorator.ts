@@ -12,7 +12,6 @@ export const SearchParams = createParamDecorator(
           ? false
           : true
         : undefined,
-      username: queries.username,
       deliveryType: queries.deliveryType,
       offerType: queries.offerType,
       text: queries.text ?? '',

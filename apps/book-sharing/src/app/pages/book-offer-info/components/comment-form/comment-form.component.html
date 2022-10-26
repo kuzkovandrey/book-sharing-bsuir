@@ -1,0 +1,15 @@
+<div class="form">
+  <tui-text-area [formControl]="commentControl">Комментарий</tui-text-area>
+
+  <button
+    (click)="onClickButton()"
+    [disabled]="commentControl.invalid"
+    tuiButton
+    appearance="primary"
+    [size]="fieldSize"
+    class="form__button"
+    type="button"
+  >
+    Отправить
+  </button>
+</div>

@@ -1,6 +1,5 @@
 import {
   deliveryTypeToText,
-  DeliveryTypes,
   offerTypeToText,
 } from '@book-sharing/api-interfaces';
 import { SharedModule } from '@shared/shared.module';
@@ -22,6 +21,8 @@ export class BookOfferCardComponent {
 
   @Output() changeButtonClick = new EventEmitter<BookOfferModel>();
 
+  @Output() detailsClick = new EventEmitter<number>();
+
   get deliveryType(): string {
     return deliveryTypeToText(this.bookOffer.deliveryType);
   }
@@ -41,5 +42,9 @@ export class BookOfferCardComponent {
 
   onClickChangeButton() {
     this.changeButtonClick.emit(this.bookOffer);
+  }
+
+  onClickDetails() {
+    this.detailsClick.emit(this.bookOffer.id);
   }
 }

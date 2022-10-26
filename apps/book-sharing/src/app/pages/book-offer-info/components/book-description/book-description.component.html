@@ -1,0 +1,13 @@
+<div *ngIf="book" class="description">
+  <h4 appTitle>{{ book.title }}</h4>
+  <p appText>{{ book.description }}</p>
+  <p appText>Жанр: {{ book.genre.name }}</p>
+  <p appText>Язык: {{ book.language.name }}</p>
+  <p appText>Издательство: {{ book.publisher.name }}</p>
+  <p appText>Год: {{ book.publicationYear }}</p>
+  <p appText>Кол-во страниц: {{ book.pageCount }}</p>
+  <p appText>Авторы:</p>
+  <ng-container *ngFor="let author of bookAuthors">
+    <p appText>{{ author }}</p>
+  </ng-container>
+</div>

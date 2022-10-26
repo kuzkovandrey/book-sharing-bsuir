@@ -1,0 +1,56 @@
+@import 'mixins';
+
+.image {
+  width: 20rem;
+  height: 26rem;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.offer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  @include element(image) {
+    width: 20rem;
+    height: 28rem;
+  }
+}
+
+.carousel {
+  margin-bottom: 1rem;
+}
+
+.additional {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+
+  @include element(user) {
+    padding: 1rem;
+    border: 1px solid var(--tui-base-03);
+    border-radius: 2rem;
+  }
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
+
+  @include element(list) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    width: 100%;
+  }
+}

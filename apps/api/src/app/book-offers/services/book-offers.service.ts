@@ -21,6 +21,7 @@ export class BookOffersService {
       password: false,
       createdAt: true,
       refreshToken: false,
+      telephones: true,
     },
   } as const;
 
@@ -30,6 +31,7 @@ export class BookOffersService {
       publisher: true,
       pictures: true,
       authors: true,
+      language: true,
     },
     user: true,
   };
@@ -62,8 +64,14 @@ export class BookOffersService {
   findById(id: number): Promise<BookOfferEntity> {
     return this.bookOffersRepository.findOneOrFail({
       where: { id },
-      relations: this.findRelations,
-      select: this.selectOptions,
+      relations: {
+        ...this.findRelations,
+        comments: { user: true },
+      },
+      select: {
+        ...this.selectOptions,
+        comments: true,
+      },
     });
   }
   search(

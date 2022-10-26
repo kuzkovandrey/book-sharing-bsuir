@@ -6,10 +6,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   BookOfferModel,
   BookOfferSearchParams,
-  DeliveryTypes,
-  OfferType,
 } from '@book-sharing/api-interfaces';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { AppRoutes } from '@core/values';
 
 @Component({
   selector: 'main',
@@ -27,7 +27,8 @@ export class MainComponent implements OnInit, OnDestroy {
   constructor(
     private mainFacade: MainFacade,
     private loadingService: LoadingService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +61,10 @@ export class MainComponent implements OnInit, OnDestroy {
     };
 
     console.log(this.searchParams);
+  }
+
+  navigateToDetailsPage(id: number) {
+    this.router.navigate([AppRoutes.BOOK_OFFER, id]);
   }
 
   search(text: string) {

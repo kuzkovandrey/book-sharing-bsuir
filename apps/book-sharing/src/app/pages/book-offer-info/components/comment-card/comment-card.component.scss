@@ -1,0 +1,21 @@
+@import 'mixins';
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--tui-support-01);
+
+  @include element(text) {
+    color: var(--tui-base-08);
+    font: var(--tui-font-heading-6);
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
