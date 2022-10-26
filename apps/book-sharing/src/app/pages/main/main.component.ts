@@ -1,3 +1,4 @@
+import { ModelWithCollectionState } from './../../features/collections/services/collection.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AlertService } from '@core/services/alert.service';
 import { LoadingService } from '@core/services/loading.service';
@@ -7,7 +8,7 @@ import {
   BookOfferModel,
   BookOfferSearchParams,
 } from '@book-sharing/api-interfaces';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AppRoutes } from '@core/values';
 
@@ -20,16 +21,20 @@ import { AppRoutes } from '@core/values';
 export class MainComponent implements OnInit, OnDestroy {
   private readonly subscriptions = new Subscription();
 
-  resultList: BookOfferModel[];
+  resultList: ModelWithCollectionState<BookOfferModel>[];
 
   private searchParams: BookOfferSearchParams = {};
+
+  readonly isAuthtorized$: Observable<boolean>;
 
   constructor(
     private mainFacade: MainFacade,
     private loadingService: LoadingService,
     private alertService: AlertService,
     private router: Router
-  ) {}
+  ) {
+    this.isAuthtorized$ = this.mainFacade.isAuthrorized$;
+  }
 
   ngOnInit(): void {
     this.loadingService.setLoading(true);
@@ -89,5 +94,9 @@ export class MainComponent implements OnInit, OnDestroy {
         },
       })
     );
+  }
+
+  toggleCollectionState(offer: ModelWithCollectionState<BookOfferModel>) {
+    this.mainFacade.toggleCollectionState(offer);
   }
 }

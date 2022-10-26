@@ -11,7 +11,6 @@ import { UserInfoFacade } from '../services/user-info.facade';
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss'],
-  providers: [UserInfoFacade],
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
   private readonly subscriptions = new Subscription();
@@ -69,5 +68,9 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     this.router.navigate([AppRoutes.PROFILE, AppRoutes.CHANGE_INFO], {
       state: { user },
     });
+  }
+
+  navigateToOfferDetails(id: number) {
+    this.router.navigate([AppRoutes.BOOK_OFFER, id]);
   }
 }

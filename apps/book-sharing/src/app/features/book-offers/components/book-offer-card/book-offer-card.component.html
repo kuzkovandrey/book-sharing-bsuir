@@ -3,26 +3,26 @@
     <span [ngStyle]="pictureStyles" class="preview__picture"></span>
 
     <button
-      *ngIf="hasCollectionButton; else changeButton"
+      *ngIf="hasCollectionButton"
+      (click)="onClickCollectionButton()"
+      tuiButton
+      [appearance]="inCollection ? 'accent' : 'primary'"
+      size="s"
+      type="button"
+    >
+      {{ inCollection ? 'Удалить из закладок' : 'В закладки' }}
+    </button>
+
+    <button
+      *ngIf="hasChangeButton"
+      (click)="onClickChangeButton()"
       tuiButton
       appearance="primary"
       size="s"
       type="button"
     >
-      В закладки
+      Изменить
     </button>
-
-    <ng-template #changeButton>
-      <button
-        (click)="onClickChangeButton()"
-        tuiButton
-        appearance="primary"
-        size="s"
-        type="button"
-      >
-        Изменить
-      </button>
-    </ng-template>
   </div>
 
   <div class="card__description description">

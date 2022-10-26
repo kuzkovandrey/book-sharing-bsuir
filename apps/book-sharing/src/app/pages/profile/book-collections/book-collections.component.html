@@ -1,1 +1,11 @@
-<p>book-collections works!</p>
+<div *ngIf="collectionList" class="page">
+  <div class="page__list">
+    <app-book-offer-card
+      *ngFor="let offer of collectionList"
+      [hasCollectionButton]="true"
+      [inCollection]="offer.inCollection"
+      (detailsClick)="navigateToOfferDetails($event)"
+      [bookOffer]="offer"
+    ></app-book-offer-card>
+  </div>
+</div>

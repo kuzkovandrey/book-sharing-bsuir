@@ -21,8 +21,9 @@
         <div
           class="offer-list__book-offer"
           (changeButtonClick)="navigateToChangeBookOffer($event)"
+          (detailsClick)="navigateToOfferDetails($event)"
           appBookOfferCard
-          [hasCollectionButton]="false"
+          [hasChangeButton]="true"
           [bookOffer]="bookOffer"
         ></div>
       </ng-container>

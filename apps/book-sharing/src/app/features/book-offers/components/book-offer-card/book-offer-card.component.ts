@@ -17,9 +17,15 @@ import { BookOfferModel } from '@book-sharing/api-interfaces';
 export class BookOfferCardComponent {
   @Input() bookOffer: BookOfferModel;
 
-  @Input() hasCollectionButton = true;
+  @Input() hasCollectionButton = false;
+
+  @Input() hasChangeButton = false;
+
+  @Input() inCollection = false;
 
   @Output() changeButtonClick = new EventEmitter<BookOfferModel>();
+
+  @Output() collectionButtonClick = new EventEmitter<number>();
 
   @Output() detailsClick = new EventEmitter<number>();
 
@@ -46,5 +52,9 @@ export class BookOfferCardComponent {
 
   onClickDetails() {
     this.detailsClick.emit(this.bookOffer.id);
+  }
+
+  onClickCollectionButton() {
+    this.collectionButtonClick.emit(this.bookOffer.id);
   }
 }

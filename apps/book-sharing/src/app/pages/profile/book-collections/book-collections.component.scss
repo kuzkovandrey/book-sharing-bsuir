@@ -1,0 +1,10 @@
+@import 'mixins';
+
+.page {
+  @include element(list) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+}

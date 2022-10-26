@@ -1,4 +1,16 @@
-import { map, Observable, switchMap } from 'rxjs';
+import {
+  CollectionService,
+  ModelWithCollectionState,
+} from '@features/collections/services/collection.service';
+import {
+  map,
+  mergeAll,
+  mergeMap,
+  Observable,
+  of,
+  switchMap,
+  toArray,
+} from 'rxjs';
 import { BookOffersService } from '@features/book-offers/services/book-offers.services';
 import { UserService } from '@features/user/services/user.service';
 import { Injectable } from '@angular/core';
@@ -17,7 +29,8 @@ export interface UserInfoWithOffers {
 export class UserInfoFacade {
   constructor(
     private readonly userService: UserService,
-    private readonly bookOffersService: BookOffersService
+    private readonly bookOffersService: BookOffersService,
+    private readonly collectionService: CollectionService
   ) {}
 
   getUserInfoWithOffers(): Observable<UserInfoWithOffers> {
@@ -34,5 +47,26 @@ export class UserInfoFacade {
     changes: Partial<Omit<CreateUserDto, 'refreshToken'>>
   ): Observable<UserModel> {
     return this.userService.updateUserInfo(changes);
+  }
+
+  getBookOffersFromCollection(): Observable<
+    ModelWithCollectionState<BookOfferModel>[]
+  > {
+    return of(this.collectionService.getCollectionList()).pipe(
+      mergeAll(),
+      mergeMap((id) =>
+        this.bookOffersService
+          .findById(id)
+          .pipe(
+            map((offer) => this.collectionService.mapToWithCollection(offer))
+          )
+      ),
+      toArray()
+    );
+  }
+
+  toggleCollectionState(offer: ModelWithCollectionState<BookOfferModel>) {
+    this.collectionService.toggleCollectionState(offer.id);
+    offer.inCollection = !offer.inCollection;
   }
 }

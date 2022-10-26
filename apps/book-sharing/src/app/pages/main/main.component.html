@@ -10,7 +10,10 @@
     <section
       *ngFor="let offer of resultList"
       appBookOfferCard
+      [inCollection]="offer.inCollection"
+      [hasCollectionButton]="isAuthtorized$ | async"
       (detailsClick)="navigateToDetailsPage($event)"
+      (collectionButtonClick)="toggleCollectionState(offer)"
       [bookOffer]="offer"
     ></section>
   </div>

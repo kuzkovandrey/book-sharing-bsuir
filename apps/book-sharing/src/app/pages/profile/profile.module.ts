@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ChangeUserInfoComponent } from './change-user-info/change-user-info.component';
 import { UserFormComponent } from '@features/user/components';
 import { UserInfoCardComponent } from '@features/user/components/user-info-card/user-info-card.component';
+import { UserInfoFacade } from './services/user-info.facade';
 
 const routes: Routes = [
   {
@@ -61,5 +62,6 @@ const routes: Routes = [
     CreateBookOfferComponent,
     ChangeUserInfoComponent,
   ],
+  providers: [UserInfoFacade],
 })
 export class ProfileModule {}
