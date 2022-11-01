@@ -1,11 +1,12 @@
 <form [formGroup]="filterForm" class="filter row">
   <tui-select
+    class="filter__input"
     [stringify]="stringifyDeliveryTypes"
     [tuiTextfieldSize]="fieldSize"
     formControlName="deliveryType"
   >
     Условия доставки
-    <input tuiTextfield placeholder="deliveryType" />
+    <input tuiTextfield placeholder="Условия доставки" />
     <tui-data-list-wrapper
       *tuiDataList
       [items]="deliveryTypeTexts"
@@ -14,12 +15,13 @@
   </tui-select>
 
   <tui-select
+    class="filter__input"
     [stringify]="stringifyOfferType"
     [tuiTextfieldSize]="fieldSize"
     formControlName="offerType"
   >
     Условия обмена
-    <input tuiTextfield placeholder="offerType" />
+    <input tuiTextfield placeholder="Условия обмена" />
     <tui-data-list-wrapper
       *tuiDataList
       [items]="offerTypeTexts"
@@ -27,8 +29,23 @@
     ></tui-data-list-wrapper>
   </tui-select>
 
-  <div class="row">
+  <tui-select
+    class="filter__input"
+    [stringify]="stringifyLocationRegion"
+    [tuiTextfieldSize]="fieldSize"
+    formControlName="region"
+  >
+    Регион
+    <input tuiTextfield placeholder="Регион" />
+    <tui-data-list-wrapper
+      *tuiDataList
+      [items]="locationRegionTexts"
+      [itemContent]="stringifyLocationRegion | tuiStringifyContent"
+    ></tui-data-list-wrapper>
+  </tui-select>
+
+  <!-- <div class="row">
     <tui-toggle formControlName="isActive" size="l"></tui-toggle>
     <span>Объявление активно?</span>
-  </div>
+  </div> -->
 </form>

@@ -5,6 +5,8 @@ import {
   OfferType,
   stringifyOfferType,
   BookOfferSearchParams,
+  LocationRegion,
+  stringifyLocationRegion,
 } from '@book-sharing/api-interfaces';
 import {
   Component,
@@ -31,14 +33,19 @@ export class SearchFilterComponent implements OnInit, OnDestroy {
 
   readonly stringifyOfferType = stringifyOfferType;
 
+  readonly stringifyLocationRegion = stringifyLocationRegion;
+
   readonly deliveryTypeTexts = Object.values(DeliveryTypes);
 
   readonly offerTypeTexts = Object.values(OfferType);
 
+  readonly locationRegionTexts = Object.values(LocationRegion);
+
   private readonly defaultSearchParams: Omit<BookOfferSearchParams, 'text'> = {
     isActive: true,
-    deliveryType: DeliveryTypes.MAILING,
-    offerType: OfferType.FREE,
+    deliveryType: null,
+    offerType: null,
+    region: null,
   };
 
   @Output() filterChanges = new EventEmitter<
@@ -48,6 +55,7 @@ export class SearchFilterComponent implements OnInit, OnDestroy {
   constructor() {
     this.deliveryTypeTexts.push('' as DeliveryTypes);
     this.offerTypeTexts.push('' as OfferType);
+    this.locationRegionTexts.push('' as LocationRegion);
   }
 
   ngOnInit(): void {
@@ -68,9 +76,10 @@ export class SearchFilterComponent implements OnInit, OnDestroy {
 
   private initFilterForm() {
     this.filterForm = new FormGroup({
-      deliveryType: new FormControl(DeliveryTypes.MAILING),
-      offerType: new FormControl(OfferType.FREE),
-      isActive: new FormControl(true),
+      deliveryType: new FormControl(this.defaultSearchParams.deliveryType),
+      offerType: new FormControl(this.defaultSearchParams.offerType),
+      isActive: new FormControl(this.defaultSearchParams.isActive),
+      region: new FormControl(this.defaultSearchParams.region),
     });
   }
 }

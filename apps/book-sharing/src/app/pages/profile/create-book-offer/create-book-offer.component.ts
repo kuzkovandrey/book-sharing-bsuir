@@ -13,9 +13,10 @@ import {
   offerTypeToText,
   deliveryTypeToText,
   BookOfferModel,
+  BookOfferStatus,
+  LocationRegion,
 } from '@book-sharing/api-interfaces';
 import { Router } from '@angular/router';
-
 import { Subscription } from 'rxjs';
 
 export type CreateBookOfferModalType = 'create' | 'edit';
@@ -47,6 +48,10 @@ export class CreateBookOfferComponent implements OnDestroy {
 
   readonly offerTypeTexts = Object.values(OfferType);
 
+  readonly locationRegionList = Object.values(LocationRegion);
+
+  readonly offerStatusTexts = Object.values(BookOfferStatus);
+
   authors: Array<Author> = [];
 
   pictures: Array<string> = [];
@@ -70,7 +75,10 @@ export class CreateBookOfferComponent implements OnDestroy {
       this.offerForm.get('info').valid &&
       this.offerForm.get('isActive').valid &&
       this.offerForm.get('deliveryType').valid &&
-      this.offerForm.get('offerType').valid
+      this.offerForm.get('offerType').valid &&
+      this.offerForm.get('location').get('region').valid &&
+      this.offerForm.get('location').get('city').valid &&
+      this.offerForm.get('offerStatus').valid
     );
   }
 
@@ -105,12 +113,16 @@ export class CreateBookOfferComponent implements OnDestroy {
 
     if (this.type === 'edit') {
       this.bookOffer = state.bookOffer;
-      const { info, isActive, deliveryType, offerType } = this.bookOffer;
+      const { info, isActive, deliveryType, offerType, offerStatus, location } =
+        this.bookOffer;
 
       this.offerForm.get('info').setValue(info);
       this.offerForm.get('isActive').setValue(isActive);
       this.offerForm.get('deliveryType').setValue(deliveryType);
       this.offerForm.get('offerType').setValue(offerType);
+      this.offerForm.get('location').get('region').setValue(location.region);
+      this.offerForm.get('location').get('city').setValue(location.city);
+      this.offerForm.get('offerStatus').setValue(offerStatus);
     }
   }
 
@@ -205,6 +217,15 @@ export class CreateBookOfferComponent implements OnDestroy {
       offerType: new FormControl<OfferType>(OfferType.FREE, [
         Validators.required,
       ]),
+      offerStatus: new FormControl(BookOfferStatus.ACTIVE, [
+        Validators.required,
+      ]),
+      location: new FormGroup({
+        region: new FormControl(LocationRegion.MINSK_REGION, [
+          Validators.required,
+        ]),
+        city: new FormControl('', [Validators.required]),
+      }),
     });
   }
 

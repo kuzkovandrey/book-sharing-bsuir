@@ -23,6 +23,8 @@ export class BookOfferCardComponent {
 
   @Input() inCollection = false;
 
+  @Input() isShowUserInfo = true;
+
   @Output() changeButtonClick = new EventEmitter<BookOfferModel>();
 
   @Output() collectionButtonClick = new EventEmitter<number>();

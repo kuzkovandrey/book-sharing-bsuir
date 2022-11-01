@@ -10,8 +10,13 @@ import {
 
 import { BaseEntity, TableNames } from '@core';
 import { UserEntity } from '@users/entities';
-import { DeliveryTypes, OfferType } from '@book-sharing/api-interfaces';
+import {
+  BookOfferStatus,
+  DeliveryTypes,
+  OfferType,
+} from '@book-sharing/api-interfaces';
 import { CommentEntity } from './comment.entity';
+import { LocationEntity } from './location.entity';
 
 @Entity({ name: TableNames.BOOK_OFFERS })
 export class BookOfferEntity extends BaseEntity {
@@ -38,6 +43,14 @@ export class BookOfferEntity extends BaseEntity {
   @Column({
     nullable: false,
     type: 'enum',
+    enum: BookOfferStatus,
+    default: BookOfferStatus.ACTIVE,
+  })
+  offerStatus: BookOfferStatus;
+
+  @Column({
+    nullable: false,
+    type: 'enum',
     enum: OfferType,
     default: OfferType.FREE,
   })
@@ -50,4 +63,10 @@ export class BookOfferEntity extends BaseEntity {
     onDelete: 'SET NULL',
   })
   comments: CommentEntity[];
+
+  //
+  @ManyToOne(() => LocationEntity, {
+    onDelete: 'SET NULL',
+  })
+  location: LocationEntity;
 }

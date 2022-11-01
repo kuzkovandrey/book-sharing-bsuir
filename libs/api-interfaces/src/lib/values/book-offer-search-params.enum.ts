@@ -1,4 +1,5 @@
 import { DeliveryTypes } from './delivery-types.enum';
+import { LocationRegion } from './location-region.enum';
 import { OfferType } from './offer-type.enum';
 
 export enum BookOfferQueries {
@@ -6,6 +7,7 @@ export enum BookOfferQueries {
   DELIVERY_TYPE = 'deliveryType',
   OFFER_TYPE = 'offerType',
   TEXT = 'text',
+  REGION = 'region',
 }
 
 export type BookOfferSearchParams = Partial<{
@@ -13,4 +15,5 @@ export type BookOfferSearchParams = Partial<{
   deliveryType: DeliveryTypes;
   offerType: OfferType;
   text: string;
+  region: LocationRegion;
 }>;

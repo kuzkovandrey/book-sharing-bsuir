@@ -4,6 +4,13 @@
   "offerType": "FREE",
   "info": "info",
   "isActive": true,
+
+  "offerStatus": "Активно",
+  "location": {
+    "city": "Минск",
+    "region": "Минская обл."
+  },
+
   "book": {
     "title": "title",
     "description": "description",

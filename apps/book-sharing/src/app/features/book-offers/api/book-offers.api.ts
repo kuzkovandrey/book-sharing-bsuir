@@ -24,10 +24,12 @@ export class BookOffersApi {
     deliveryType,
     offerType,
     text,
+    region,
   }: BookOfferSearchParams): Observable<BookOfferModel[]> {
     return this.api.get({
       url: `${ApiControllers.BOOK_OFFERS}${ApiControllers.SEARCH}`,
       params: {
+        ...(region ? { region } : {}),
         ...(isActive ? { isActive } : {}),
         ...(deliveryType ? { deliveryType } : {}),
         ...(offerType ? { offerType } : {}),

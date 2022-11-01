@@ -158,12 +158,36 @@
 
     <div>
       <tui-toggle formControlName="isActive" size="l"></tui-toggle>
-      <span>Объявление активно?</span>
+      <span>Доступно для других пользователей?</span>
     </div>
 
     <tui-input [tuiTextfieldSize]="fieldSize" formControlName="info">
       Дополнительная информация об условиях, контакты, время связи
     </tui-input>
+
+    <tui-select [tuiTextfieldSize]="fieldSize" formControlName="offerStatus">
+      Статус объявления
+      <input tuiTextfield placeholder="Статус объявления" />
+      <tui-data-list-wrapper
+        *tuiDataList
+        [items]="offerStatusTexts"
+      ></tui-data-list-wrapper>
+    </tui-select>
+
+    <div class="form" formGroupName="location">
+      <tui-select [tuiTextfieldSize]="fieldSize" formControlName="region">
+        Условия обмена
+        <input tuiTextfield placeholder="Условия обмена" />
+        <tui-data-list-wrapper
+          *tuiDataList
+          [items]="locationRegionList"
+        ></tui-data-list-wrapper>
+      </tui-select>
+
+      <tui-input [tuiTextfieldSize]="fieldSize" formControlName="city">
+        Город
+      </tui-input>
+    </div>
 
     <ng-container *ngIf="type === 'create'"> </ng-container>
 

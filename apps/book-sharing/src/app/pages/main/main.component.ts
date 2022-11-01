@@ -73,8 +73,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   search(text: string) {
-    console.log(text);
-
     this.loadingService.setLoading(true);
 
     this.searchParams = {

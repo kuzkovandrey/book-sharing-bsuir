@@ -32,14 +32,30 @@
 
       <tui-tag
         size="m"
-        [value]="bookOffer.isActive ? 'Активно' : 'Объявление не активно'"
+        [value]="bookOffer.offerStatus"
+        status="success"
+      ></tui-tag>
+
+      <tui-tag
+        size="m"
+        [value]="bookOffer.isActive ? 'Доступно' : 'Скрыто'"
         [status]="bookOffer.isActive ? 'primary' : 'warning'"
       ></tui-tag>
     </div>
 
     <h5 class="subtitle" appSubtitle>{{ bookOffer.book.title }}</h5>
-    <p class="text" appText>{{ bookOffer.book.description }}</p>
     <p class="text" appText>{{ bookOffer.info }}</p>
+
+    <p class="text" appText>
+      {{ bookOffer.location.region }}, {{ bookOffer.location.city }}
+    </p>
+
+    <ng-container *ngIf="isShowUserInfo">
+      <p appText>
+        Пользователь:
+        <span class="subtitle" appSubtitle>{{ bookOffer.user.username }}</span>
+      </p>
+    </ng-container>
 
     <span (click)="onClickDetails()" appLink>Подробнее</span>
   </div>

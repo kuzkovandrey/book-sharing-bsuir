@@ -3,6 +3,7 @@ import {
   BookOfferSearchParams,
   ChangeOfferValuesDto,
   CreateBookOfferDto,
+  LocationRegion,
 } from '@book-sharing/api-interfaces';
 import { BookOfferEntity, CommentEntity } from './../entities';
 import { Injectable } from '@nestjs/common';
@@ -10,6 +11,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { BooksService } from '@books';
 import { Like, Repository } from 'typeorm';
 import { CommentsService } from './comments.service';
+import { LocationsService } from './locations.service';
 
 @Injectable()
 export class BookOffersService {
@@ -34,6 +36,7 @@ export class BookOffersService {
       language: true,
     },
     user: true,
+    location: true,
   };
 
   constructor(
@@ -41,7 +44,8 @@ export class BookOffersService {
     private readonly bookOffersRepository: Repository<BookOfferEntity>,
     private readonly booksService: BooksService,
     private readonly usersService: UsersService,
-    private readonly commentsService: CommentsService
+    private readonly commentsService: CommentsService,
+    private readonly locationsService: LocationsService
   ) {}
 
   findAll(): Promise<BookOfferEntity[]> {
@@ -74,12 +78,16 @@ export class BookOffersService {
       },
     });
   }
+
   search(
     text: string,
-    { isActive, deliveryType, offerType }: BookOfferSearchParams = {}
+    { isActive, deliveryType, offerType, region }: BookOfferSearchParams = {}
   ) {
     return this.bookOffersRepository.find({
       where: {
+        location: {
+          ...(region !== undefined ? { region } : {}),
+        },
         book: {
           ...(text ? { title: Like(`%${text}%`) } : {}),
         },
@@ -94,10 +102,18 @@ export class BookOffersService {
 
   async create(
     userId: number,
-    { book, deliveryType, info, offerType }: CreateBookOfferDto
+    {
+      book,
+      deliveryType,
+      info,
+      offerType,
+      offerStatus,
+      location: locationDto,
+    }: CreateBookOfferDto
   ): Promise<BookOfferEntity> {
     const user = await this.usersService.findById(userId);
     const createdBook = await this.booksService.create(book);
+    const location = await this.locationsService.createIfNotExists(locationDto);
 
     const offer = this.bookOffersRepository.create({
       info,
@@ -105,6 +121,8 @@ export class BookOffersService {
       deliveryType,
       user,
       offerType,
+      location,
+      offerStatus,
     });
 
     return offer.save();
@@ -118,14 +136,29 @@ export class BookOffersService {
 
   async changeValues(
     id: number,
-    { isActive, info, deliveryType, offerType }: Partial<ChangeOfferValuesDto>
+    {
+      isActive,
+      info,
+      deliveryType,
+      offerType,
+      offerStatus,
+      location: locationDto,
+    }: Partial<ChangeOfferValuesDto>
   ): Promise<BookOfferEntity> {
     const offer = await this.bookOffersRepository.findOneByOrFail({ id });
+
+    if (locationDto) {
+      const location = await this.locationsService.createIfNotExists(
+        locationDto
+      );
+      offer.location = location;
+    }
 
     offer.offerType = offerType ?? offer.offerType;
     offer.deliveryType = deliveryType ?? offer.deliveryType;
     offer.isActive = isActive ?? offer.isActive;
     offer.info = info ?? offer.info;
+    offer.offerStatus = offerStatus ?? offer.offerStatus;
 
     return offer.save();
   }
