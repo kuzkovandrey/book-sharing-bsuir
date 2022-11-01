@@ -13,6 +13,9 @@ import { ChangeUserInfoComponent } from './change-user-info/change-user-info.com
 import { UserFormComponent } from '@features/user/components';
 import { UserInfoCardComponent } from '@features/user/components/user-info-card/user-info-card.component';
 import { UserInfoFacade } from './services/user-info.facade';
+import { ExchangesComponent } from './exchanges/exchanges.component';
+import { ExchangeCardComponent } from '@features/exchanges/components/exchange-card/exchange-card.component';
+import { UserExchangesFacade } from './services/user-exchanges.facade';
 
 const routes: Routes = [
   {
@@ -40,6 +43,10 @@ const routes: Routes = [
         path: AppRoutes.CHANGE_INFO,
         component: ChangeUserInfoComponent,
       },
+      {
+        path: AppRoutes.EXCHANGES,
+        component: ExchangesComponent,
+      },
     ],
   },
 ];
@@ -53,6 +60,7 @@ const routes: Routes = [
     BookOfferCardComponent,
     UserFormComponent,
     UserInfoCardComponent,
+    ExchangeCardComponent,
   ],
   exports: [RouterModule],
   declarations: [
@@ -61,7 +69,8 @@ const routes: Routes = [
     BookCollectionsComponent,
     CreateBookOfferComponent,
     ChangeUserInfoComponent,
+    ExchangesComponent,
   ],
-  providers: [UserInfoFacade],
+  providers: [UserInfoFacade, UserExchangesFacade],
 })
 export class ProfileModule {}

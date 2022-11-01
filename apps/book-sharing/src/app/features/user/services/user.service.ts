@@ -1,6 +1,6 @@
 import { AppStorageService } from '@core/services/storage';
 import { CreateUserDto, UserModel } from '@book-sharing/api-interfaces';
-import { Observable, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { UserApi } from './../api/user.api';
 import { Injectable } from '@angular/core';
 

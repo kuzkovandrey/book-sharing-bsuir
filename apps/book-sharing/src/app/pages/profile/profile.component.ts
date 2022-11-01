@@ -20,6 +20,10 @@ export class ProfileComponent implements OnInit {
       path: AppRoutes.CREATE,
       name: 'Добавить книгу',
     },
+    {
+      path: AppRoutes.EXCHANGES,
+      name: 'Мой обмен',
+    },
   ] as const;
 
   constructor() {}

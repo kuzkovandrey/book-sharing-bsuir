@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="offer">
+    <img class="offer__image" [src]="from.book.pictures[0].url" />
+
+    <div class="offer__description">
+      <p appText>
+        Книга: {{ from.book.title | textOverflow: 12 }} № {{ from.book.id }}
+      </p>
+      <p appText>Пользователь: {{ from.user.username }}</p>
+    </div>
+  </div>
+
+  <p appSubtitle>обменять на</p>
+
+  <div class="offer">
+    <img class="offer__image" [src]="to.book.pictures[0].url" />
+
+    <div class="offer__description">
+      <p appText>
+        Книга: {{ to.book.title | textOverflow: 12 }} № {{ to.book.id }}
+      </p>
+      <p appText>Пользователь: {{ to.user.username }}</p>
+    </div>
+  </div>
+
+  <tui-tag [value]="status"></tui-tag>
+
+  <ng-container *ngIf="isShowExchangeButtons">
+    <button
+      (click)="onClickButton(true)"
+      tuiButton
+      appearance="primary"
+      size="s"
+      type="button"
+    >
+      Подтвердить
+    </button>
+
+    <button
+      (click)="onClickButton(true)"
+      tuiButton
+      appearance="accent"
+      size="s"
+      type="button"
+    >
+      Отказать
+    </button>
+  </ng-container>
+</div>

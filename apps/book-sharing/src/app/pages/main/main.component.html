@@ -12,8 +12,12 @@
       appBookOfferCard
       [inCollection]="offer.inCollection"
       [hasCollectionButton]="isAuthtorized$ | async"
+      [hasExchangeButton]="
+        (isAuthtorized$ | async) && offer.user.id !== user?.id
+      "
       (detailsClick)="navigateToDetailsPage($event)"
       (collectionButtonClick)="toggleCollectionState(offer)"
+      (exchangeClick)="openCreateExchangeModal($event)"
       [bookOffer]="offer"
     ></section>
   </div>

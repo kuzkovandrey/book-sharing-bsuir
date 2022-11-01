@@ -25,11 +25,15 @@ export class BookOfferCardComponent {
 
   @Input() isShowUserInfo = true;
 
+  @Input() hasExchangeButton = true;
+
   @Output() changeButtonClick = new EventEmitter<BookOfferModel>();
 
   @Output() collectionButtonClick = new EventEmitter<number>();
 
   @Output() detailsClick = new EventEmitter<number>();
+
+  @Output() exchangeClick = new EventEmitter<number>();
 
   get deliveryType(): string {
     return deliveryTypeToText(this.bookOffer.deliveryType);
@@ -58,5 +62,9 @@ export class BookOfferCardComponent {
 
   onClickCollectionButton() {
     this.collectionButtonClick.emit(this.bookOffer.id);
+  }
+
+  onClickExchangeButton() {
+    this.exchangeClick.emit(this.bookOffer.id);
   }
 }

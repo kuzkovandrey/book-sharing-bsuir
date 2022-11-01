@@ -1,4 +1,5 @@
-import { ModelWithCollectionState } from './../../features/collections/services/collection.service';
+import { ModalDialogService } from '@core/services/modal-dialog.service';
+import { ModelWithCollectionState } from '@features/collections/services/collection.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AlertService } from '@core/services/alert.service';
 import { LoadingService } from '@core/services/loading.service';
@@ -7,10 +8,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   BookOfferModel,
   BookOfferSearchParams,
+  UserModel,
 } from '@book-sharing/api-interfaces';
 import { Subscription, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AppRoutes } from '@core/values';
+import {
+  CreateExchangeInput,
+  CreateExchangeModalComponent,
+  CreateExchangeOutput,
+} from '@features/exchanges/components/create-exchange-modal/create-exchange-modal.component';
 
 @Component({
   selector: 'main',
@@ -23,21 +30,28 @@ export class MainComponent implements OnInit, OnDestroy {
 
   resultList: ModelWithCollectionState<BookOfferModel>[];
 
+  private userOffersList: BookOfferModel[];
+
   private searchParams: BookOfferSearchParams = {};
 
   readonly isAuthtorized$: Observable<boolean>;
+
+  user: UserModel;
 
   constructor(
     private mainFacade: MainFacade,
     private loadingService: LoadingService,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private modalDialogService: ModalDialogService
   ) {
     this.isAuthtorized$ = this.mainFacade.isAuthrorized$;
   }
 
   ngOnInit(): void {
     this.loadingService.setLoading(true);
+
+    this.subscriptions.add();
 
     this.subscriptions.add(
       this.mainFacade.getAllOffers().subscribe({
@@ -50,6 +64,18 @@ export class MainComponent implements OnInit, OnDestroy {
           this.alertService.showError(
             `Ошибка при получении данных ${error.status}`
           );
+        },
+      })
+    );
+
+    this.subscriptions.add(
+      this.mainFacade.getUserInfoWithOffers().subscribe({
+        next: ({ user, bookOffers }) => {
+          this.userOffersList = bookOffers;
+          this.user = user;
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log('Unauthorized');
         },
       })
     );
@@ -96,5 +122,42 @@ export class MainComponent implements OnInit, OnDestroy {
 
   toggleCollectionState(offer: ModelWithCollectionState<BookOfferModel>) {
     this.mainFacade.toggleCollectionState(offer);
+  }
+
+  private createOfferExchage({ fromOfferId, toOfferId }: CreateExchangeOutput) {
+    this.loadingService.setLoading(true);
+
+    this.subscriptions.add(
+      this.mainFacade
+        .createExchange({
+          fromOfferId,
+          toOfferId,
+        })
+        .subscribe({
+          next: () => {
+            this.alertService.showSuccess('Заяка на обмен успешно отправлена');
+            this.loadingService.setLoading(false);
+          },
+          error: (error: HttpErrorResponse) => {
+            this.loadingService.setLoading(false);
+            this.alertService.showError(
+              `Ошибка при создании заявки на обмен ${error.status}`
+            );
+          },
+        })
+    );
+  }
+
+  openCreateExchangeModal(fromOfferId: number) {
+    this.subscriptions.add(
+      this.modalDialogService
+        .open(CreateExchangeModalComponent, {
+          id: fromOfferId,
+          userOffers: this.userOffersList,
+        } as CreateExchangeInput)
+        .subscribe((out) => {
+          this.createOfferExchage(out as CreateExchangeOutput);
+        })
+    );
   }
 }

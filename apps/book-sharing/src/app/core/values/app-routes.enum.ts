@@ -11,4 +11,5 @@ export enum AppRoutes {
   BOOK_COLLECTIONS = 'book-collections',
   CREATE = 'create',
   CHANGE_INFO = 'change-info',
+  EXCHANGES = 'exchanges',
 }

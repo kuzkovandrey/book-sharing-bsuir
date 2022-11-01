@@ -27,6 +27,7 @@ import { TextComponent } from './components/text/text.component';
 import { LinkComponent } from './components/link/link.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { SearchFilterComponent } from './components/search-filter/search-filter.component';
+import { TextOverflowPipe } from './pipes/text-overflow.pipe';
 
 @NgModule({
   imports: [
@@ -56,6 +57,7 @@ import { SearchFilterComponent } from './components/search-filter/search-filter.
     LinkComponent,
     SearchBarComponent,
     SearchFilterComponent,
+    TextOverflowPipe,
   ],
   exports: [
     AppHeaderComponent,
@@ -81,6 +83,7 @@ import { SearchFilterComponent } from './components/search-filter/search-filter.
     TuiInputPasswordModule,
     SearchBarComponent,
     SearchFilterComponent,
+    TextOverflowPipe,
   ],
 })
 export class SharedModule {}

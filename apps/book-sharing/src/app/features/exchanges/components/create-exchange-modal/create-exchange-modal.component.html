@@ -1,0 +1,31 @@
+<div class="modal">
+  <div *ngIf="userOfferList && userOfferList.length" class="form">
+    <tui-combo-box
+      tuiTextfieldSize="m"
+      [formControl]="offerController"
+      [tuiTextfieldLabelOutside]="true"
+    >
+      Книга
+      <input tuiTextfield placeholder="Книга" />
+      <tui-data-list-wrapper
+        *tuiDataList
+        [items]="userOfferList"
+      ></tui-data-list-wrapper>
+    </tui-combo-box>
+
+    <button
+      (click)="onClickExchangeButton()"
+      tuiButton
+      appearance="outline"
+      size="s"
+      type="button"
+    >
+      Обменять на эту книгу
+    </button>
+  </div>
+
+  <p appSubtitle *ngIf="userOfferList && !userOfferList.length">
+    У Вас нет книг для обмена.
+    <span (click)="navigateToProfile()" appLink>Перейдите, чтобы добавить</span>
+  </p>
+</div>

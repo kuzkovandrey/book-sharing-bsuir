@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 export class ModalDialogService {
   constructor(private dialogService: TuiDialogService) {}
 
-  open<C extends object, R>(component: Type<C>): Observable<R> {
-    return this.dialogService.open(new PolymorpheusComponent(component));
+  open<C extends object, R>(component: Type<C>, data?: unknown): Observable<R> {
+    return this.dialogService.open(new PolymorpheusComponent(component), {
+      data,
+    });
   }
 }

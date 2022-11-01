@@ -1,13 +1,23 @@
-import { ModelWithCollectionState } from './../../../features/collections/services/collection.service';
+import { CreateExchangeDto } from './../../../../../../../libs/api-interfaces/src/lib/dto/create-exchange.dto';
+import { ExchangesService } from '@features/exchanges/services/exchages.service';
+import { UserService } from '@features/user/services/user.service';
+import { ModelWithCollectionState } from '@features/collections/services/collection.service';
 import { CollectionService } from '@features/collections/services/collection.service';
 import { AuthService } from '@features/auth';
 import { BookOffersService } from '@features/book-offers/services/book-offers.services';
 import {
   BookOfferModel,
   BookOfferSearchParams,
+  ExchangeModel,
+  UserModel,
 } from '@book-sharing/api-interfaces';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
+
+export interface UserInfoWithOffers {
+  user: UserModel;
+  bookOffers: BookOfferModel[];
+}
 
 @Injectable({ providedIn: 'root' })
 export class MainFacade {
@@ -18,7 +28,9 @@ export class MainFacade {
   constructor(
     private bookOffersService: BookOffersService,
     private authService: AuthService,
-    private collectionService: CollectionService
+    private collectionService: CollectionService,
+    private userService: UserService,
+    private exchangesService: ExchangesService
   ) {}
 
   search(
@@ -40,5 +52,19 @@ export class MainFacade {
   toggleCollectionState(offer: ModelWithCollectionState<BookOfferModel>) {
     this.collectionService.toggleCollectionState(offer.id);
     offer.inCollection = !offer.inCollection;
+  }
+
+  getUserInfoWithOffers(): Observable<UserInfoWithOffers> {
+    return this.userService.getPersonalInfo().pipe(
+      switchMap((user) => {
+        return this.bookOffersService
+          .findAllByUserId(user.id)
+          .pipe(map((bookOffers) => ({ bookOffers, user })));
+      })
+    );
+  }
+
+  createExchange(dto: CreateExchangeDto): Observable<ExchangeModel> {
+    return this.exchangesService.createExchange(dto);
   }
 }

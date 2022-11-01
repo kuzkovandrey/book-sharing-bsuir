@@ -1,0 +1,12 @@
+<div class="page">
+  <div *ngIf="exchangeList" class="list">
+    <p appSubtitle *ngIf="!exchangeList.length">Ничего не найдено...</p>
+
+    <div
+      *ngFor="let exchange of exchangeList"
+      appExchangeCard
+      [isShowExchangeButtons]="user && user.id !== exchange.from.user.id"
+      [exchange]="exchange"
+    ></div>
+  </div>
+</div>
