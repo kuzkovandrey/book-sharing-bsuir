@@ -25,7 +25,7 @@ export class BookOfferCardComponent {
 
   @Input() isShowUserInfo = true;
 
-  @Input() hasExchangeButton = true;
+  @Input() hasExchangeButton = false;
 
   @Output() changeButtonClick = new EventEmitter<BookOfferModel>();
 

@@ -2,7 +2,11 @@ import { UserInfoFacade } from './../services/user-info.facade';
 import { AlertService } from '@core/services/alert.service';
 import { LoadingService } from '@core/services/loading.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ExchangeModel, UserModel } from '@book-sharing/api-interfaces';
+import {
+  ChangeExchangeStatusDto,
+  ExchangeModel,
+  UserModel,
+} from '@book-sharing/api-interfaces';
 import { UserExchangesFacade } from '../services/user-exchanges.facade';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -61,6 +65,23 @@ export class ExchangesComponent implements OnInit, OnDestroy {
         error: ({ status }: HttpErrorResponse) => {
           this.loadingService.setLoading(false);
           this.alertService.showError(`Ошибка при загрузке данных ${status}`);
+        },
+      })
+    );
+  }
+
+  handleChangeExchangeState(dto: ChangeExchangeStatusDto) {
+    this.subscriptions.add(
+      this.userExchangesFacade.setExchangeStatus(dto).subscribe({
+        next: () => {
+          this.loadingService.setLoading(false);
+          this.fetchAllExchanges();
+        },
+        error: () => {
+          this.loadingService.setLoading(false);
+          this.alertService.showError(
+            `Ошибка при изменении статута обмена ${status}`
+          );
         },
       })
     );

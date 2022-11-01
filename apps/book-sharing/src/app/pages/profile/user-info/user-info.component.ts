@@ -73,4 +73,23 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   navigateToOfferDetails(id: number) {
     this.router.navigate([AppRoutes.BOOK_OFFER, id]);
   }
+
+  logout() {
+    this.loadingService.setLoading(true);
+
+    this.subscriptions.add(
+      this.userInfoFacade.logout().subscribe({
+        next: () => {
+          this.router.navigate([AppRoutes.MAIN]);
+          this.loadingService.setLoading(false);
+        },
+        error: ({ status }: HttpErrorResponse) => {
+          this.alertService.showError(
+            `Произошла ошибка при выходе из аккаунта ${status}`
+          );
+          this.loadingService.setLoading(false);
+        },
+      })
+    );
+  }
 }

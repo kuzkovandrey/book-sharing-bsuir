@@ -2,6 +2,7 @@
   <app-user-info-card
     [user]="user"
     (onClickChangeButton)="navigateToChangeUserInfo($event)"
+    (logoutClick)="logout()"
   ></app-user-info-card>
 
   <div class="user-info__offer-list offer-list">
@@ -10,8 +11,8 @@
       class="offer-list__title"
       *ngIf="bookOffers && !bookOffers.length"
     >
-      <span appLink (click)="navigateToCreateBookOffer()">Добавьте</span> свою
-      первую книгу
+      <span appLink (click)="navigateToCreateBookOffer()"> Добавьте</span> новую
+      книгу
     </h4>
 
     <ng-container *ngIf="bookOffers && bookOffers.length">

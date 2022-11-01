@@ -2,7 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
 import {
+  ChangeExchangeStatusDto,
   ExchangeModel,
+  ExchangeStatus,
   exchangeStatusToText,
 } from '@book-sharing/api-interfaces';
 
@@ -18,7 +20,7 @@ export class ExchangeCardComponent {
 
   @Input() isShowExchangeButtons = true;
 
-  @Output() clickExchangeButton = new EventEmitter<boolean>();
+  @Output() clickExchangeButton = new EventEmitter<ChangeExchangeStatusDto>();
 
   get from() {
     return this.exchange.from;
@@ -33,6 +35,9 @@ export class ExchangeCardComponent {
   }
 
   onClickButton(isAgree: boolean) {
-    this.clickExchangeButton.emit(isAgree);
+    this.clickExchangeButton.emit({
+      status: isAgree ? ExchangeStatus.CONFIRM : ExchangeStatus.CANCLE,
+      exchangeId: this.exchange.id,
+    });
   }
 }

@@ -13,7 +13,7 @@
       [inCollection]="offer.inCollection"
       [hasCollectionButton]="isAuthtorized$ | async"
       [hasExchangeButton]="
-        (isAuthtorized$ | async) && offer.user.id !== user?.id
+        (isAuthtorized$ | async) && user && offer.user.id !== user.id
       "
       (detailsClick)="navigateToDetailsPage($event)"
       (collectionButtonClick)="toggleCollectionState(offer)"

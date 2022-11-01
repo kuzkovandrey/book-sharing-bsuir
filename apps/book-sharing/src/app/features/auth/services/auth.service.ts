@@ -44,7 +44,7 @@ export class AuthService {
     return this.authApi.logout().pipe(
       tap(() => {
         this.appStorageService.clear();
-        this.setAuth(true);
+        this.setAuth(false);
       })
     );
   }

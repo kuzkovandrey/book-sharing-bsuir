@@ -12,7 +12,7 @@ import {
   UserModel,
 } from '@book-sharing/api-interfaces';
 import { Injectable } from '@angular/core';
-import { map, Observable, switchMap } from 'rxjs';
+import { map, Observable, of, switchMap } from 'rxjs';
 
 export interface UserInfoWithOffers {
   user: UserModel;
@@ -55,11 +55,18 @@ export class MainFacade {
   }
 
   getUserInfoWithOffers(): Observable<UserInfoWithOffers> {
-    return this.userService.getPersonalInfo().pipe(
-      switchMap((user) => {
-        return this.bookOffersService
-          .findAllByUserId(user.id)
-          .pipe(map((bookOffers) => ({ bookOffers, user })));
+    return this.authService.isAuthorized$.pipe(
+      switchMap((isAuth) => {
+        if (isAuth)
+          return this.userService.getPersonalInfo().pipe(
+            switchMap((user) => {
+              return this.bookOffersService
+                .findAllByUserId(user.id)
+                .pipe(map((bookOffers) => ({ bookOffers, user })));
+            })
+          );
+
+        return of({ user: null, bookOffers: [] } as UserInfoWithOffers);
       })
     );
   }

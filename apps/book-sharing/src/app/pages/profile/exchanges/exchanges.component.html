@@ -5,7 +5,10 @@
     <div
       *ngFor="let exchange of exchangeList"
       appExchangeCard
-      [isShowExchangeButtons]="user && user.id !== exchange.from.user.id"
+      (clickExchangeButton)="handleChangeExchangeState($event)"
+      [isShowExchangeButtons]="
+        user && user.id !== exchange.from.user.id && exchange.status !== 1
+      "
       [exchange]="exchange"
     ></div>
   </div>

@@ -15,11 +15,17 @@ export class UserInfoCardComponent implements OnInit {
 
   @Output() onClickChangeButton = new EventEmitter<UserModel>();
 
+  @Output() logoutClick = new EventEmitter<void>();
+
   constructor() {}
 
   ngOnInit(): void {}
 
   onClickChange() {
     this.onClickChangeButton.emit(this.user);
+  }
+
+  onClickLogoutButton() {
+    this.logoutClick.emit();
   }
 }

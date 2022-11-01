@@ -1,3 +1,4 @@
+import { AuthService } from '@features/auth';
 import {
   CollectionService,
   ModelWithCollectionState,
@@ -30,8 +31,13 @@ export class UserInfoFacade {
   constructor(
     private readonly userService: UserService,
     private readonly bookOffersService: BookOffersService,
-    private readonly collectionService: CollectionService
+    private readonly collectionService: CollectionService,
+    private readonly authService: AuthService
   ) {}
+
+  logout(): Observable<unknown> {
+    return this.authService.logout();
+  }
 
   getUserInfoWithOffers(): Observable<UserInfoWithOffers> {
     return this.userService.getPersonalInfo().pipe(

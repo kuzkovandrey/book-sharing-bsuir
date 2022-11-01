@@ -1,3 +1,4 @@
+import { ApiControllers } from './../../../../../../libs/api-interfaces/src/lib/values/api-controllers.enum';
 import { AppRoutes, StorageKeys } from '@core/values';
 import { Router } from '@angular/router';
 import { AuthService } from '@features/auth';
@@ -10,7 +11,14 @@ import {
   HttpErrorResponse,
   HttpStatusCode,
 } from '@angular/common/http';
-import { catchError, delay, Observable, throwError, switchMap } from 'rxjs';
+import {
+  catchError,
+  delay,
+  Observable,
+  throwError,
+  switchMap,
+  map,
+} from 'rxjs';
 import { AppStorageService } from '@core/services/storage';
 
 @Injectable()
@@ -37,9 +45,15 @@ export class AuthErrorInterceptor implements HttpInterceptor {
         return next.handle(REQ).pipe(
           catchError((e) => {
             this.router.navigate([AppRoutes.AUTH]);
-            return throwError(() => e);
+
+            return throwError(() => {});
           })
         );
+      }),
+      catchError((e) => {
+        this.router.navigate([AppRoutes.AUTH]);
+
+        return throwError(() => e);
       })
     );
   }
