@@ -1,3 +1,4 @@
+import { ExchangeEntity } from './../../exchanges/entities/exhange.entity';
 import { BookEntity } from '../../books';
 import {
   Entity,
@@ -64,7 +65,6 @@ export class BookOfferEntity extends BaseEntity {
   })
   comments: CommentEntity[];
 
-  //
   @ManyToOne(() => LocationEntity, {
     onDelete: 'SET NULL',
   })

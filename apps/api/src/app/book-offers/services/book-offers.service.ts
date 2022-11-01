@@ -50,15 +50,19 @@ export class BookOffersService {
 
   findAll(): Promise<BookOfferEntity[]> {
     return this.bookOffersRepository.find({
+      where: {
+        isActive: true,
+      },
       select: this.selectOptions,
       relations: this.findRelations,
     });
   }
 
-  findAllByUserId(id: number): Promise<BookOfferEntity[]> {
+  findAllByUserId(id: number, isActive?: boolean): Promise<BookOfferEntity[]> {
     return this.bookOffersRepository.find({
       where: {
         user: { id },
+        ...(isActive !== undefined ? { isActive } : {}),
       },
       select: this.selectOptions,
       relations: this.findRelations,

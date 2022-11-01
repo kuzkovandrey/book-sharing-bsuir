@@ -12,4 +12,5 @@ export enum TableNames {
   COMMENTS = 'comments',
   TELEPHONES = 'telephones',
   LOCATIONS = 'locations',
+  EXCHANGES = 'exchenges',
 }

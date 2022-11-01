@@ -18,5 +18,6 @@ import { LocationsService } from './services/locations.service';
   ],
   controllers: [BookOffersController],
   providers: [BookOffersService, CommentsService, LocationsService],
+  exports: [BookOffersService],
 })
 export class BookOffersModule {}

@@ -77,7 +77,7 @@ export class AuthService {
         },
         {
           secret: this.jwt.accessSecret,
-          expiresIn: '30m',
+          expiresIn: '1d',
         }
       ),
       this.jwtService.signAsync(

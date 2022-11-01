@@ -11,3 +11,4 @@ export * from './user.model';
 export * from './telephone.model';
 export * from './comment.model';
 export * from './location.model';
+export * from './exchange.model';

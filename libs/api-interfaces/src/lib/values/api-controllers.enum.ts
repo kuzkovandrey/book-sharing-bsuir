@@ -11,4 +11,5 @@ export enum ApiControllers {
   COMMENTS = '/comments',
   SEARCH = '/search',
   PERSONAL_INFO = '/personal_info',
+  EXCHANGES = '/exchanges',
 }

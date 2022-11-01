@@ -40,7 +40,7 @@ export class BookOffersController extends BaseController {
 
   @Get(`${ApiControllers.USER}/:id`)
   findAllByUserId(@Param('id') id: number): Promise<BookOfferEntity[]> {
-    return this.bookOffersService.findAllByUserId(id);
+    return this.bookOffersService.findAllByUserId(id, true);
   }
 
   @Get(':id')
