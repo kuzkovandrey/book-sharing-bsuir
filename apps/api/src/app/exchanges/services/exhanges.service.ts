@@ -2,7 +2,7 @@ import { BookOffersService } from '../../book-offers/services';
 import { ExchangeEntity } from './../entities/exhange.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOptionsRelations, Repository } from 'typeorm';
 import {
   CreateExchangeDto,
   ExchangeStatus,
@@ -10,6 +10,23 @@ import {
 
 @Injectable()
 export class ExchangesService {
+  private readonly searchRelations: FindOptionsRelations<ExchangeEntity> = {
+    from: {
+      book: {
+        pictures: true,
+      },
+      user: true,
+      location: true,
+    },
+    to: {
+      book: {
+        pictures: true,
+      },
+      user: true,
+      location: true,
+    },
+  };
+
   constructor(
     @InjectRepository(ExchangeEntity)
     private readonly exchangesRepository: Repository<ExchangeEntity>,
@@ -47,8 +64,8 @@ export class ExchangesService {
         id: exchangeId,
       },
       relations: {
-        from: { user: true },
-        to: { user: true },
+        from: { location: true, user: true, book: { pictures: true } },
+        to: { location: true, user: true, book: { pictures: true } },
       },
     });
 
@@ -76,6 +93,14 @@ export class ExchangesService {
     }
   }
 
+  findAll(): Promise<ExchangeEntity[]> {
+    return this.exchangesRepository.find({
+      relations: {
+        ...this.searchRelations,
+      },
+    });
+  }
+
   findAllByUserId(id: number): Promise<ExchangeEntity[]> {
     return this.exchangesRepository.find({
       where: [
@@ -86,20 +111,7 @@ export class ExchangesService {
           to: { user: { id } },
         },
       ],
-      relations: {
-        from: {
-          book: {
-            pictures: true,
-          },
-          user: true,
-        },
-        to: {
-          book: {
-            pictures: true,
-          },
-          user: true,
-        },
-      },
+      relations: this.searchRelations,
     });
   }
 }

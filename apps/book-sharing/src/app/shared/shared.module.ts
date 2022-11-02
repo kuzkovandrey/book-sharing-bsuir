@@ -28,6 +28,8 @@ import { LinkComponent } from './components/link/link.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 import { TextOverflowPipe } from './pipes/text-overflow.pipe';
+import { TuiTableModule } from '@taiga-ui/addon-table';
+import { TuiLetModule } from '@taiga-ui/cdk';
 
 @NgModule({
   imports: [
@@ -48,6 +50,8 @@ import { TextOverflowPipe } from './pipes/text-overflow.pipe';
     TuiFilterPipeModule,
     TuiTagModule,
     TuiInputPasswordModule,
+    TuiTableModule,
+    TuiLetModule,
   ],
   declarations: [
     AppHeaderComponent,
@@ -84,6 +88,8 @@ import { TextOverflowPipe } from './pipes/text-overflow.pipe';
     SearchBarComponent,
     SearchFilterComponent,
     TextOverflowPipe,
+    TuiTableModule,
+    TuiLetModule,
   ],
 })
 export class SharedModule {}

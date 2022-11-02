@@ -77,8 +77,8 @@ export class CreateBookOfferComponent implements OnDestroy {
       this.offerForm.get('deliveryType').valid &&
       this.offerForm.get('offerType').valid &&
       this.offerForm.get('location').get('region').valid &&
-      this.offerForm.get('location').get('city').valid &&
-      this.offerForm.get('offerStatus').valid
+      this.offerForm.get('location').get('city').valid
+      // this.offerForm.get('offerStatus').valid
     );
   }
 
@@ -113,7 +113,7 @@ export class CreateBookOfferComponent implements OnDestroy {
 
     if (this.type === 'edit') {
       this.bookOffer = state.bookOffer;
-      const { info, isActive, deliveryType, offerType, offerStatus, location } =
+      const { info, isActive, deliveryType, offerType, location } =
         this.bookOffer;
 
       this.offerForm.get('info').setValue(info);
@@ -122,7 +122,7 @@ export class CreateBookOfferComponent implements OnDestroy {
       this.offerForm.get('offerType').setValue(offerType);
       this.offerForm.get('location').get('region').setValue(location.region);
       this.offerForm.get('location').get('city').setValue(location.city);
-      this.offerForm.get('offerStatus').setValue(offerStatus);
+      // this.offerForm.get('offerStatus').setValue(offerStatus);
     }
   }
 
@@ -217,9 +217,9 @@ export class CreateBookOfferComponent implements OnDestroy {
       offerType: new FormControl<OfferType>(OfferType.FREE, [
         Validators.required,
       ]),
-      offerStatus: new FormControl(BookOfferStatus.ACTIVE, [
-        Validators.required,
-      ]),
+      // offerStatus: new FormControl(BookOfferStatus.ACTIVE, [
+      //   Validators.required,
+      // ]),
       location: new FormGroup({
         region: new FormControl(LocationRegion.MINSK_REGION, [
           Validators.required,

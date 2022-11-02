@@ -15,6 +15,11 @@ export class ExchangesController extends BaseController {
     super('exchanges');
   }
 
+  @Get(ApiControllers.STATS)
+  findAll() {
+    return this.exchangesService.findAll();
+  }
+
   @UseGuards(AccessTokenGuard)
   @Post()
   createExchange(

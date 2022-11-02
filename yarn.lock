@@ -2456,6 +2456,13 @@
   resolved "https://registry.yarnpkg.com/@sqltools/formatter/-/formatter-1.2.5.tgz#3abc203c79b8c3e90fd6c156a0c62d5403520e12"
   integrity sha512-Uy0+khmZqUrUGm5dmMqVlnvufZRSK0FbYzVgp0UMstm+F5+W2/jnEEQyc9vo1ZR/E5ZI/B1WjjoTqBqwJL6Krw==
 
+"@taiga-ui/addon-table@^3.9.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@taiga-ui/addon-table/-/addon-table-3.9.0.tgz#bdc217696c63a4746edf0a3e0af6572ebe05bcac"
+  integrity sha512-PaCU9pwWk3IKlF13jM42Ev+i9n3KxwbUM+yL+UIqnOua0Pl+6p+dxfPr2jVipSyXTJyL3phacScOepkN98HOGA==
+  dependencies:
+    tslib "^2.0.0"
+
 "@taiga-ui/cdk@^3.7.1":
   version "3.7.1"
   resolved "https://registry.npmjs.org/@taiga-ui/cdk/-/cdk-3.7.1.tgz"

@@ -1,5 +1,7 @@
-<section class="page create-page">
+<section class="create-page">
   <form class="form" [formGroup]="offerForm">
+    <p *ngIf="isShowBookForm" appSubtitle>Описание книгги</p>
+
     <div *ngIf="isShowBookForm" class="form" formGroupName="book">
       <tui-input [tuiTextfieldSize]="fieldSize" formControlName="title">
         Название
@@ -128,6 +130,8 @@
       </button>
     </form>
 
+    <p appSubtitle>Дополнительная информация</p>
+
     <tui-select
       [stringify]="stringifyDeliveryTypes"
       [tuiTextfieldSize]="fieldSize"
@@ -165,14 +169,14 @@
       Дополнительная информация об условиях, контакты, время связи
     </tui-input>
 
-    <tui-select [tuiTextfieldSize]="fieldSize" formControlName="offerStatus">
+    <!-- <tui-select [tuiTextfieldSize]="fieldSize" formControlName="offerStatus">
       Статус объявления
       <input tuiTextfield placeholder="Статус объявления" />
       <tui-data-list-wrapper
         *tuiDataList
         [items]="offerStatusTexts"
       ></tui-data-list-wrapper>
-    </tui-select>
+    </tui-select> -->
 
     <div class="form" formGroupName="location">
       <tui-select [tuiTextfieldSize]="fieldSize" formControlName="region">

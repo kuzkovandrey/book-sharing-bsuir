@@ -12,4 +12,5 @@ export enum AppRoutes {
   CREATE = 'create',
   CHANGE_INFO = 'change-info',
   EXCHANGES = 'exchanges',
+  STATS = 'stats',
 }

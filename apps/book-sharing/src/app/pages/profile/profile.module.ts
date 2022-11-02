@@ -16,6 +16,8 @@ import { UserInfoFacade } from './services/user-info.facade';
 import { ExchangesComponent } from './exchanges/exchanges.component';
 import { ExchangeCardComponent } from '@features/exchanges/components/exchange-card/exchange-card.component';
 import { UserExchangesFacade } from './services/user-exchanges.facade';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { ExchangeStatusToTextPipe } from '@features/exchanges/pipes/exchange-status-to-text.pipe';
 
 const routes: Routes = [
   {
@@ -47,6 +49,10 @@ const routes: Routes = [
         path: AppRoutes.EXCHANGES,
         component: ExchangesComponent,
       },
+      {
+        path: AppRoutes.STATS,
+        component: StatisticsComponent,
+      },
     ],
   },
 ];
@@ -61,6 +67,7 @@ const routes: Routes = [
     UserFormComponent,
     UserInfoCardComponent,
     ExchangeCardComponent,
+    ExchangeStatusToTextPipe,
   ],
   exports: [RouterModule],
   declarations: [
@@ -70,6 +77,7 @@ const routes: Routes = [
     CreateBookOfferComponent,
     ChangeUserInfoComponent,
     ExchangesComponent,
+    StatisticsComponent,
   ],
   providers: [UserInfoFacade, UserExchangesFacade],
 })

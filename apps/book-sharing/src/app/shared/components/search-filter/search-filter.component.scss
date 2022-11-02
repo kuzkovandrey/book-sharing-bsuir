@@ -3,6 +3,10 @@
 .filter {
   @include element(input) {
     min-width: 12rem;
+
+    @include mobile {
+      width: 100%;
+    }
   }
 }
 

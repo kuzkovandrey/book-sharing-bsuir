@@ -1,12 +1,12 @@
 import { Location } from '../models';
-import { BookOfferStatus, DeliveryTypes, OfferType } from '../values';
+import { DeliveryTypes, OfferType } from '../values';
 import { CreateBookDto } from './create-book.dto';
 
 export interface CreateBookOfferDto {
   book: CreateBookDto;
   deliveryType: DeliveryTypes;
   offerType: OfferType;
-  offerStatus: BookOfferStatus;
+  // offerStatus: BookOfferStatus;
   location: Location;
   info: string;
   isActive?: boolean;

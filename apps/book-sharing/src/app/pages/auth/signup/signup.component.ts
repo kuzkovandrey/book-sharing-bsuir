@@ -12,7 +12,7 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })
-export class SignupComponent implements OnDestroy {
+export class SignupComponent implements OnInit, OnDestroy {
   private readonly subscriptions = new Subscription();
 
   constructor(
@@ -22,12 +22,16 @@ export class SignupComponent implements OnDestroy {
     private alertService: AlertService
   ) {}
 
-  navigateToSignIn() {
-    this.router.navigate([AppRoutes.AUTH, AppRoutes.SIGN_IN]);
+  ngOnInit(): void {
+    this.loadingService.setLoading(false);
   }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  navigateToSignIn() {
+    this.router.navigate([AppRoutes.AUTH, AppRoutes.SIGN_IN]);
   }
 
   signup(authDto: AuthDto) {

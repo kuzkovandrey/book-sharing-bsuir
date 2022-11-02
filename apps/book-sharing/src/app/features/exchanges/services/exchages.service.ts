@@ -22,4 +22,8 @@ export class ExchangesService {
   getAllUserExchanges(): Observable<ExchangeModel[]> {
     return this.exchangesApi.getAllUserExchanges();
   }
+
+  getAllExchanges(): Observable<ExchangeModel[]> {
+    return this.exchangesApi.getAllExchanges();
+  }
 }

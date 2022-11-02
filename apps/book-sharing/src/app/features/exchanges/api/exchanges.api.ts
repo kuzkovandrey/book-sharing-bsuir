@@ -23,4 +23,10 @@ export class ExchangesApi {
   getAllUserExchanges(): Observable<ExchangeModel[]> {
     return this.api.get({ url: ApiControllers.EXCHANGES });
   }
+
+  getAllExchanges(): Observable<ExchangeModel[]> {
+    return this.api.get({
+      url: `${ApiControllers.EXCHANGES}${ApiControllers.STATS}`,
+    });
+  }
 }

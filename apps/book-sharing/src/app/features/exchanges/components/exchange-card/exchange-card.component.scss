@@ -8,6 +8,11 @@
   gap: 1rem;
   border-radius: 2rem;
   border: 1px solid var(--tui-support-01);
+
+  @include tablet {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .offer {
@@ -27,5 +32,16 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+  }
+}
+
+.link {
+  font-weight: 700;
+  color: var(--tui-link);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--tui-link-hover);
+    text-decoration: underline;
   }
 }

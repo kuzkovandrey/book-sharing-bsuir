@@ -1,4 +1,4 @@
-import { ApiControllers } from './../../../../../../libs/api-interfaces/src/lib/values/api-controllers.enum';
+import { ApiControllers } from '@book-sharing/api-interfaces';
 import { AppRoutes, StorageKeys } from '@core/values';
 import { Router } from '@angular/router';
 import { AuthService } from '@features/auth';
@@ -46,12 +46,12 @@ export class AuthErrorInterceptor implements HttpInterceptor {
           catchError((e) => {
             this.router.navigate([AppRoutes.AUTH]);
 
-            return throwError(() => {});
+            return throwError(() => e);
           })
         );
       }),
       catchError((e) => {
-        this.router.navigate([AppRoutes.AUTH]);
+        // this.router.navigate([AppRoutes.AUTH]);
 
         return throwError(() => e);
       })
@@ -64,7 +64,10 @@ export class AuthErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any> | never> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === HttpStatusCode.Unauthorized) {
+        if (
+          error.status === HttpStatusCode.Unauthorized &&
+          !req.url.includes(ApiControllers.REFRESH)
+        ) {
           return this.handleUnauthorizedException(req, next);
         }
 

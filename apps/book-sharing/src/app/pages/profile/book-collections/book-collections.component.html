@@ -1,4 +1,5 @@
 <div *ngIf="collectionList" class="page">
+  <p appSubtitle *ngIf="collectionList && !collectionList.length">Ничего нет</p>
   <div class="page__list">
     <app-book-offer-card
       *ngFor="let offer of collectionList"

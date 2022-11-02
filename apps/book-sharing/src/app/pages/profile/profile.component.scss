@@ -3,7 +3,11 @@
 .navbar {
   display: flex;
   justify-content: flex-start;
-  padding: 1rem;
+  padding: 0.75rem;
+
+  @include mobile {
+    flex-direction: column;
+  }
 }
 
 .link {

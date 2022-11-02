@@ -2,7 +2,7 @@ import { AuthDto, CreateUserDto, TokenDto } from '@book-sharing/api-interfaces';
 import { AuthApi } from '../api';
 import { Injectable } from '@angular/core';
 import { AppStorageService } from '@core/services/storage';
-import { BehaviorSubject, tap, Observable } from 'rxjs';
+import { BehaviorSubject, tap, Observable, catchError, throwError } from 'rxjs';
 import { StorageKeys } from '@core/values';
 
 @Injectable({
@@ -50,7 +50,14 @@ export class AuthService {
   }
 
   refreshToken() {
-    return this.authApi.refreshToken().pipe(tap(this.saveTokens));
+    return this.authApi.refreshToken().pipe(
+      tap(this.saveTokens),
+      catchError((e) => {
+        this.setAuth(false);
+
+        return throwError(() => e);
+      })
+    );
   }
 
   private saveTokens = ({ accessToken, refreshToken }: TokenDto) => {

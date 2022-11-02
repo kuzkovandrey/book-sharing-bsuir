@@ -49,9 +49,23 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadingService.setLoading(true);
+    this.fetchAllOffers();
 
-    this.subscriptions.add();
+    this.subscriptions.add(
+      this.mainFacade.getUserInfoWithOffers().subscribe({
+        next: ({ user, bookOffers }) => {
+          this.userOffersList = bookOffers;
+          this.user = user;
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log('Unauthorized');
+        },
+      })
+    );
+  }
+
+  private fetchAllOffers() {
+    this.loadingService.setLoading(true);
 
     this.subscriptions.add(
       this.mainFacade.getAllOffers().subscribe({
@@ -64,18 +78,6 @@ export class MainComponent implements OnInit, OnDestroy {
           this.alertService.showError(
             `Ошибка при получении данных ${error.status}`
           );
-        },
-      })
-    );
-
-    this.subscriptions.add(
-      this.mainFacade.getUserInfoWithOffers().subscribe({
-        next: ({ user, bookOffers }) => {
-          this.userOffersList = bookOffers;
-          this.user = user;
-        },
-        error: (error: HttpErrorResponse) => {
-          console.log('Unauthorized');
         },
       })
     );
@@ -137,6 +139,7 @@ export class MainComponent implements OnInit, OnDestroy {
           next: () => {
             this.alertService.showSuccess('Заяка на обмен успешно отправлена');
             this.loadingService.setLoading(false);
+            this.fetchAllOffers();
           },
           error: (error: HttpErrorResponse) => {
             this.loadingService.setLoading(false);

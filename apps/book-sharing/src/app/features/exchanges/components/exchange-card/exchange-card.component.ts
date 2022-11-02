@@ -22,6 +22,8 @@ export class ExchangeCardComponent {
 
   @Output() clickExchangeButton = new EventEmitter<ChangeExchangeStatusDto>();
 
+  @Output() clickOfferLink = new EventEmitter<number>();
+
   get from() {
     return this.exchange.from;
   }
@@ -39,5 +41,9 @@ export class ExchangeCardComponent {
       status: isAgree ? ExchangeStatus.CONFIRM : ExchangeStatus.CANCLE,
       exchangeId: this.exchange.id,
     });
+  }
+
+  onClickOfferLink(id: number) {
+    this.clickOfferLink.emit(id);
   }
 }

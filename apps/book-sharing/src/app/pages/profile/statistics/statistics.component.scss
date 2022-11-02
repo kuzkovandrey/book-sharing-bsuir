@@ -1,0 +1,30 @@
+@import '@taiga-ui/core/styles/taiga-ui-local';
+
+.table {
+  width: 100%;
+}
+
+.scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+td,
+th {
+  white-space: nowrap;
+  border-color: transparent;
+  border-right-color: var(--tui-base-04);
+
+  &:last-child {
+    border-right-color: transparent;
+  }
+}
+
+tbody {
+  border-color: transparent;
+}
+
+tr:nth-child(even) td {
+  background: var(--tui-base-02);
+}

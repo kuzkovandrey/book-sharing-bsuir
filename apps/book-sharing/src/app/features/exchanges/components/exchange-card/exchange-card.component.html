@@ -3,10 +3,12 @@
     <img class="offer__image" [src]="from.book.pictures[0].url" />
 
     <div class="offer__description">
-      <p appText>
+      <p appText class="link" (click)="onClickOfferLink(from.id)">
         Книга: {{ from.book.title | textOverflow: 12 }} № {{ from.book.id }}
       </p>
       <p appText>Пользователь: {{ from.user.username }}</p>
+      <p appText>Емейл: {{ from.user.email }}</p>
+      <p appLink>{{ from.location.region }}, {{ from.location.city }}</p>
     </div>
   </div>
 
@@ -16,10 +18,12 @@
     <img class="offer__image" [src]="to.book.pictures[0].url" />
 
     <div class="offer__description">
-      <p appText>
+      <p appText class="link" (click)="onClickOfferLink(to.id)">
         Книга: {{ to.book.title | textOverflow: 12 }} № {{ to.book.id }}
       </p>
       <p appText>Пользователь: {{ to.user.username }}</p>
+      <p appText>Емейл: {{ to.user.email }}</p>
+      <p appLink>{{ to.location.region }}, {{ to.location.city }}</p>
     </div>
   </div>
 

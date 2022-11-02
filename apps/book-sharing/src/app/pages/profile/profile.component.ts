@@ -1,12 +1,12 @@
 import { AppRoutes } from '@core/values';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   readonly profileMenuRoutes = [
     {
       path: AppRoutes.USER_INFO,
@@ -24,9 +24,9 @@ export class ProfileComponent implements OnInit {
       path: AppRoutes.EXCHANGES,
       name: 'Мой обмен',
     },
+    {
+      path: AppRoutes.STATS,
+      name: 'Общая статистика',
+    },
   ] as const;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

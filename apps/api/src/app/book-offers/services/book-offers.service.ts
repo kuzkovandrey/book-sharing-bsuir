@@ -111,7 +111,6 @@ export class BookOffersService {
       deliveryType,
       info,
       offerType,
-      offerStatus,
       location: locationDto,
     }: CreateBookOfferDto
   ): Promise<BookOfferEntity> {
@@ -126,7 +125,6 @@ export class BookOffersService {
       user,
       offerType,
       location,
-      offerStatus,
     });
 
     return offer.save();
@@ -145,7 +143,6 @@ export class BookOffersService {
       info,
       deliveryType,
       offerType,
-      offerStatus,
       location: locationDto,
     }: Partial<ChangeOfferValuesDto>
   ): Promise<BookOfferEntity> {
@@ -162,7 +159,6 @@ export class BookOffersService {
     offer.deliveryType = deliveryType ?? offer.deliveryType;
     offer.isActive = isActive ?? offer.isActive;
     offer.info = info ?? offer.info;
-    offer.offerStatus = offerStatus ?? offer.offerStatus;
 
     return offer.save();
   }

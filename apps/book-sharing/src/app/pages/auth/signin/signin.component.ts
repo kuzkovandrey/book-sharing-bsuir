@@ -13,7 +13,7 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss'],
 })
-export class SigninComponent implements OnDestroy {
+export class SigninComponent implements OnInit, OnDestroy {
   private readonly subscriptions = new Subscription();
 
   constructor(
@@ -22,6 +22,10 @@ export class SigninComponent implements OnDestroy {
     private authService: AuthService,
     private alertService: AlertService
   ) {}
+
+  ngOnInit() {
+    this.loadingService.setLoading(false);
+  }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();

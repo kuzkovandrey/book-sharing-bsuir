@@ -1,0 +1,49 @@
+<div class="scroll-container">
+  <table class="table" *ngIf="tableList" tuiTable [columns]="tableColumn">
+    <thead tuiThead>
+      <tr tuiThGroup>
+        <th *tuiHead="'id'" tuiTh>id</th>
+        <!-- From -->
+        <th *tuiHead="'fromTitle'" tuiTh>Книга</th>
+        <th *tuiHead="'fromUser'" tuiTh>Пользователь</th>
+        <th *tuiHead="'fromRegion'" tuiTh>Геолокация</th>
+        <!-- To -->
+        <th *tuiHead="'toTitle'" tuiTh>Книга</th>
+        <th *tuiHead="'toUser'" tuiTh>Пользователь</th>
+        <th *tuiHead="'toRegion'" tuiTh>Геолокация</th>
+        <th *tuiHead="'status'" tuiTh [sorter]="null">Статус</th>
+      </tr>
+    </thead>
+
+    <tbody
+      *tuiLet="tableList | tuiTableSort as sortedExchanges"
+      tuiTbody
+      [data]="sortedExchanges"
+    >
+      <tr *ngFor="let exchange of sortedExchanges; let index = index" tuiTr>
+        <td *tuiCell="'id'" tuiTd>{{ exchange.id }}</td>
+        <!-- From -->
+        <td *tuiCell="'fromTitle'" tuiTd>{{ exchange.fromTitle }}</td>
+        <td *tuiCell="'fromUser'" tuiTd>
+          {{ exchange.fromUser }}
+        </td>
+        <td *tuiCell="'fromRegion'" tuiTd>
+          {{ exchange.fromRegion }}
+        </td>
+
+        <!-- To -->
+        <td *tuiCell="'toTitle'" tuiTd>{{ exchange.toTitle }}</td>
+        <td *tuiCell="'toUser'" tuiTd>{{ exchange.toUser }}</td>
+        <td *tuiCell="'toRegion'" tuiTd>
+          {{ exchange.toRegion }}
+        </td>
+
+        <td *tuiCell="'status'" tuiTd>
+          {{ exchange.status }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p *ngIf="tableList && !tableList.length">Ничего не найдено...</p>

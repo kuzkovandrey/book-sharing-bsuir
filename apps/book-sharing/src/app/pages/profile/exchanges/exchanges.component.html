@@ -1,4 +1,4 @@
-<div class="page">
+<div>
   <div *ngIf="exchangeList" class="list">
     <p appSubtitle *ngIf="!exchangeList.length">Ничего не найдено...</p>
 
@@ -12,4 +12,6 @@
       [exchange]="exchange"
     ></div>
   </div>
+
+  <p *ngIf="exchangeList && !exchangeList.length">Ничего не найдено...</p>
 </div>

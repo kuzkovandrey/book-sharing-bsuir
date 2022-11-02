@@ -41,13 +41,13 @@ export class BookOfferEntity extends BaseEntity {
   })
   deliveryType: DeliveryTypes;
 
-  @Column({
-    nullable: false,
-    type: 'enum',
-    enum: BookOfferStatus,
-    default: BookOfferStatus.ACTIVE,
-  })
-  offerStatus: BookOfferStatus;
+  // @Column({
+  //   nullable: false,
+  //   type: 'enum',
+  //   enum: BookOfferStatus,
+  //   default: BookOfferStatus.ACTIVE,
+  // })
+  // offerStatus: BookOfferStatus;
 
   @Column({
     nullable: false,
