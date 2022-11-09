@@ -13,11 +13,11 @@ jobs:
           heroku_app_name: 'book-sharing--bsuir-api'
           heroku_email: 'kuzkovandrey@gmail.com'
         env:
-          DATABASE_HOST: ${{secrets.DATABASE_HOST}}
-          DATABASE_PORT: ${{secrets.DATABASE_PORT}}
-          DATABASE_USER_NAME: ${{secrets.DATABASE_USER_NAME}}
-          DATABASE_USER_PASSWORD: ${{secrets.DATABASE_USER_PASSWORD}}
-          DATABASE_NAME: ${{secrets.DATABASE_NAME}}
-          SECRET: ${{secrets.SECRET}}
-          JWT_REFRESH_SECRET: ${{secrets.JWT_REFRESH_SECRET}}
-          JWT_ACCESS_SECRET: ${{secrets.JWT_ACCESS_SECRET}}
+          HD_DATABASE_HOST: ${{secrets.DATABASE_HOST}}
+          HD_DATABASE_PORT: ${{secrets.DATABASE_PORT}}
+          HD_DATABASE_USER_NAME: ${{secrets.DATABASE_USER_NAME}}
+          HD_DATABASE_USER_PASSWORD: ${{secrets.DATABASE_USER_PASSWORD}}
+          HD_DATABASE_NAME: ${{secrets.DATABASE_NAME}}
+          HD_SECRET: ${{secrets.SECRET}}
+          HD_JWT_REFRESH_SECRET: ${{secrets.JWT_REFRESH_SECRET}}
+          HD_JWT_ACCESS_SECRET: ${{secrets.JWT_ACCESS_SECRET}}
