@@ -8,15 +8,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Yarn install
-        run: yarn install 
+        run: yarn install
       - name: Build
-        run: yarn build api 
+        run: yarn build api
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "book-sharing--bsuir-api"
-          heroku_email: "kuzkovandrey@gmail.com"
-          appdir: "dist/apps/api"
+          heroku_app_name: 'book-sharing--bsuir-api'
+          heroku_email: 'kuzkovandrey@gmail.com'
         env:
           DATABASE_HOST: ${{secrets.DATABASE_HOST}}
           DATABASE_PORT: ${{secrets.DATABASE_PORT}}
