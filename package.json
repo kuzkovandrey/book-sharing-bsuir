@@ -5,9 +5,9 @@
   "scripts": {
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js",
-    "start": "node dist/apps/api/main",
+    "start": "node ./dist/apps/api/main.js",
     "start:serve": "nx serve",
-    "build": "nx build",
+    "build": "concurrently \"nx build api --prod\" \"nx build book-sharing --prod\"",
     "test": "nx test",
     "api": "nx dev-watch api",
     "client": "nx serve book-sharing",

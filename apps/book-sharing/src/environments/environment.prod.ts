@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: '/api',
+  baseUrl: 'https://book-sharing--bsuir-api.herokuapp.com/api',
 };
