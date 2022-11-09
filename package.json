@@ -13,6 +13,9 @@
     "client": "nx serve book-sharing",
     "start:dev": "concurrently --names API,CLIENT --prefix-colors green,blue  \"yarn api\" \"yarn client\" "
   },
+  "engines": {
+    "node": "16.x"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~14.2.0",
