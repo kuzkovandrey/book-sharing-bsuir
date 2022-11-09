@@ -5,7 +5,8 @@
   "scripts": {
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js",
-    "start": "nx serve",
+    "start": "node dist/apps/api/main",
+    "start:serve": "nx serve",
     "build": "nx build",
     "test": "nx test",
     "api": "nx dev-watch api",
