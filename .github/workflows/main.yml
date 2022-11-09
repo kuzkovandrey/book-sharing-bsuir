@@ -6,7 +6,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
       - uses: actions/checkout@v2
+      - name: Yarn install
+        run: yarn install 
+      - name: Build
+        run: yarn build api 
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
