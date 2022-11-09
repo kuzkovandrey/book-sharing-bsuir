@@ -11,6 +11,8 @@ import { environment } from '@env/environment';
 
 @Injectable()
 export class ProxyInterceptor implements HttpInterceptor {
+  private readonly DELAY = environment.production ? 0 : 500;
+
   intercept(
     req: HttpRequest<unknown>,
     next: HttpHandler
@@ -19,6 +21,6 @@ export class ProxyInterceptor implements HttpInterceptor {
       url: environment.baseUrl + req.url,
     });
 
-    return next.handle(request).pipe(delay(500));
+    return next.handle(request).pipe(delay(this.DELAY));
   }
 }
