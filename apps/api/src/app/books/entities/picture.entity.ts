@@ -8,6 +8,9 @@ export class PictureEntity extends BaseEntity {
   @Column({ nullable: false, type: 'varchar' })
   url: string;
 
-  @ManyToOne(() => BookEntity, (book) => book.pictures)
+  // CHANGES FOR HEROKU
+  @ManyToOne(() => BookEntity, (book) => book.pictures, {
+    onDelete: 'CASCADE',
+  })
   book: BookEntity;
 }
