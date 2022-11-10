@@ -15,14 +15,21 @@ export class AuthorsService {
     firstName,
     lastName,
   }: Author): Promise<AuthorEntity> {
-    const author = await this.authorRepository.findOneBy({
-      firstName,
-      lastName,
-    });
+    // const author = await this.authorRepository.findOneBy({
+    //   firstName,
+    //   lastName,
+    // });
 
-    if (author) return author;
+    // if (author) return author;
 
-    return await this.authorRepository.create({ firstName, lastName }).save();
+    try {
+      return await this.authorRepository.findOneByOrFail({
+        firstName,
+        lastName,
+      });
+    } catch {
+      return await this.authorRepository.create({ firstName, lastName }).save();
+    }
   }
 
   async createMany(authors: Author[]): Promise<AuthorEntity[]> {
