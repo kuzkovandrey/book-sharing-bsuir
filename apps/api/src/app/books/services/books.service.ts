@@ -4,7 +4,7 @@ import { LanguagesService } from './language.service';
 import { GenresService } from './genres.service';
 import { AuthorsService } from './authors.service';
 import { CreateBookDto } from '@book-sharing/api-interfaces';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BookEntity } from '../entities';
@@ -25,11 +25,20 @@ export class BooksService {
     const publisher = await this.publishersService.createIfNotExists(
       book.publisher
     );
+
+    Logger.log('CREATE ENTITY publisher', publisher);
+
     const pictures = await this.picturesService.createMany(book.pictures);
     const language = await this.languagesService.createIfNotExists(
       book.language
     );
+
+    Logger.log('CREATE ENTITY language', language);
+
     const genre = await this.genresService.createIfNotExists(book.genre);
+
+    Logger.log('CREATE ENTITY genre', genre);
+
     const authors = await this.authorsService.createMany(book.authors);
 
     return await this.booksRepository

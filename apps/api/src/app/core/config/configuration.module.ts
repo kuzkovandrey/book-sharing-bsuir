@@ -21,7 +21,7 @@ import mailerConfig from './mailer.config';
         username: configService.get('database.userName'),
         password: configService.get('database.userPassword'),
         database: configService.get('database.name'),
-        synchronize: !environment.production,
+        synchronize: true,
         autoLoadEntities: true,
         // dropSchema: true,
       }),
