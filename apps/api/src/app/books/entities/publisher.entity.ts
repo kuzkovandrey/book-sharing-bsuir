@@ -5,7 +5,7 @@ import { TableNames, BaseEntity } from '@core';
 
 @Entity({ name: TableNames.PUBLISHERS })
 export class PublisherEntity extends BaseEntity {
-  @Column({ nullable: false, type: 'varchar' })
+  @Column({ nullable: false, type: 'varchar', name: 'publisher_name' })
   name: string;
 
   // CHANGES FOR HEROKU

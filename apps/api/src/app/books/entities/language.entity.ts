@@ -5,7 +5,7 @@ import { TableNames, BaseEntity } from '@core';
 
 @Entity({ name: TableNames.LANGUAGES })
 export class LanguageEntity extends BaseEntity {
-  @Column({ nullable: false, type: 'varchar' })
+  @Column({ nullable: false, type: 'varchar', name: 'language_name' })
   name: string;
 
   // CHANGES FOR HEROKU

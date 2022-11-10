@@ -14,7 +14,7 @@ import mailerConfig from './mailer.config';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        type: 'mariadb',
+        type: 'mysql',
         host: configService.get('database.host'),
         port: configService.get('database.port'),
         username: configService.get('database.userName'),

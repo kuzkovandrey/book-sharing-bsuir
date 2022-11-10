@@ -5,7 +5,7 @@ import { TableNames, BaseEntity } from '@core';
 
 @Entity({ name: TableNames.GENRES })
 export class GenreEntity extends BaseEntity {
-  @Column({ nullable: false, type: 'varchar' })
+  @Column({ nullable: false, type: 'varchar', name: 'genre_name' })
   name: string;
 
   // CHANGES FOR HEROKU
