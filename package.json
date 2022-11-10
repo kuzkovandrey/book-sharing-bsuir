@@ -7,7 +7,7 @@
     "postinstall": "node ./decorate-angular-cli.js",
     "start": "node ./dist/apps/api/main.js",
     "start:serve": "nx serve",
-    "build": "concurrently \"nx build api --prod\" \"nx build book-sharing --prod\"",
+    "build": "concurrently \"nx build api\" \"nx build book-sharing\"",
     "test": "nx test",
     "api": "nx dev-watch api",
     "client": "nx serve book-sharing",
