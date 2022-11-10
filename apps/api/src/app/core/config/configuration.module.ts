@@ -1,3 +1,4 @@
+import { environment } from '../../../environments/environment';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -20,7 +21,7 @@ import mailerConfig from './mailer.config';
         username: configService.get('database.userName'),
         password: configService.get('database.userPassword'),
         database: configService.get('database.name'),
-        synchronize: true,
+        synchronize: !environment.production,
         autoLoadEntities: true,
         // dropSchema: true,
       }),
