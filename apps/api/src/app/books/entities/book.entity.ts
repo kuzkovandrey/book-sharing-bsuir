@@ -16,7 +16,7 @@ import { PictureEntity } from './picture.entity';
 
 @Entity({ name: TableNames.BOOKS })
 export class BookEntity extends BaseEntity {
-  @Column({ nullable: false, type: 'varchar', name: 'book_title' })
+  @Column({ nullable: false, type: 'varchar' })
   title: string;
 
   @Column({
@@ -27,10 +27,10 @@ export class BookEntity extends BaseEntity {
   })
   description: string;
 
-  @Column({ nullable: false, type: 'int', name: 'book_page_count' })
+  @Column({ nullable: false, type: 'int' })
   pageCount: number;
 
-  @Column({ nullable: false, type: 'int', name: 'book_publication_year' })
+  @Column({ nullable: false, type: 'int' })
   publicationYear: number;
 
   @ManyToOne(() => LanguageEntity)

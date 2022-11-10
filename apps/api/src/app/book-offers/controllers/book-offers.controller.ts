@@ -52,8 +52,8 @@ export class BookOffersController extends BaseController {
     }
   }
 
-  @UseGuards(AccessTokenGuard)
   @Post()
+  @UseGuards(AccessTokenGuard)
   create(
     @Body() createBookOfferDto: CreateBookOfferDto,
     @AuthPayload() { userId }: AuthPayloadType
@@ -65,8 +65,8 @@ export class BookOffersController extends BaseController {
     }
   }
 
-  @UseGuards(AccessTokenGuard)
   @Patch(':id')
+  @UseGuards(AccessTokenGuard)
   changeValues(@Body() changes: ChangeOfferValuesDto, @Param('id') id: number) {
     try {
       return this.bookOffersService.changeValues(id, changes);
@@ -80,8 +80,8 @@ export class BookOffersController extends BaseController {
     return this.bookOffersService.getAllComments(id);
   }
 
-  @UseGuards(AccessTokenGuard)
   @Post(`${ApiControllers.COMMENTS}/:id`)
+  @UseGuards(AccessTokenGuard)
   createComment(
     @Param('id') offerId: number,
     @Body() { text }: CreateCommentDto,
@@ -90,8 +90,8 @@ export class BookOffersController extends BaseController {
     return this.bookOffersService.createComment(offerId, userId, text);
   }
 
-  @UseGuards(AccessTokenGuard)
   @Delete(':id')
+  @UseGuards(AccessTokenGuard)
   deleteBookOffer(@Param('id') offerId: number) {
     return this.bookOffersService.delete(offerId);
   }
