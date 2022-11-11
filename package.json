@@ -14,7 +14,7 @@
     "start:dev": "concurrently --names API,CLIENT --prefix-colors green,blue  \"yarn api\" \"yarn client\" "
   },
   "engines": {
-    "node": "16.x"
+    "node": "18.x"
   },
   "private": true,
   "dependencies": {
