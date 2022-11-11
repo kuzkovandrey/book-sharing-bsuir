@@ -1,10 +1,11 @@
-import { environment } from '../../../environments/environment';
+
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MailerModule } from '@nestjs-modules/mailer';
 import databaseConfig from './database.config';
 import mailerConfig from './mailer.config';
+
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import mailerConfig from './mailer.config';
         },
       }),
     }),
+    
   ],
 })
 export class ConfigurationModule {}
