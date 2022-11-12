@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Repository } from 'typeorm';
+import { FindOptionsWhere, Repository } from 'typeorm';
 import { Location } from '@book-sharing/api-interfaces';
 import { LocationEntity } from '../entities/location.entity';
 
@@ -18,5 +18,9 @@ export class LocationsService {
     } catch {
       return await this.locationsRepository.create({ region, city }).save();
     }
+  }
+
+  async findOneBy(opts: FindOptionsWhere<LocationEntity>) {
+    return await this.locationsRepository.findOneBy(opts);
   }
 }

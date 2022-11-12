@@ -14,13 +14,12 @@ const newrelic = require('newrelic');
 
 @Injectable()
 export class ApmInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     Logger.log(
       `Parent Interceptor before: ${util.inspect(context.getHandler().name)}`
     );
     return newrelic.startWebTransaction(context.getHandler().name, function () {
       const transaction = newrelic.getTransaction();
-      // const now = Date.now();
       return next.handle().pipe(
         tap(() => {
           Logger.log(

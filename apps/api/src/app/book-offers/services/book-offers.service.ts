@@ -83,15 +83,15 @@ export class BookOffersService {
     });
   }
 
-  search(
+  async search(
     text: string,
     { isActive, deliveryType, offerType, region }: BookOfferSearchParams = {}
   ) {
+
+
     return this.bookOffersRepository.find({
       where: {
-        location: {
-          ...(region !== undefined ? { region } : {}),
-        },
+        ...(region ? { location: { region } } : {}),
         book: {
           ...(text ? { title: Like(`%${text}%`) } : {}),
         },
